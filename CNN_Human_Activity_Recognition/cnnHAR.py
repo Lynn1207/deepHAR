@@ -155,7 +155,7 @@ def _add_loss_summaries(total_loss,index):
 
     
 def inference_cov11(signals):
-    with tf.variable_scope('conv1_1_2_3_4') as scope:
+    with tf.variable_scope('conv1_01_03') as scope:
            kernel = _variable_with_weight_decay('weights',
                                                 shape=[ 20, 1, 64],
                                                 #shape=[3, 1, 128],
@@ -169,7 +169,7 @@ def inference_cov11(signals):
            print ('<<<<<<<<<<<<<<<<<<<<Shape of conv1 :',conv1.get_shape())
            
          # pool1
-    pool1 = tf.nn.max_pool1d(conv1, ksize=[1,3,1], strides=[1,3,1],padding='VALID',name='pool1_1_2_3_4')
+    pool1 = tf.nn.max_pool1d(conv1, ksize=[1,3,1], strides=[1,3,1],padding='VALID',name='pool1_01_03')
      
     reshape = tf.keras.layers.Flatten()(pool1)
     reshape = tf.cast(reshape, tf.float64)
@@ -177,7 +177,7 @@ def inference_cov11(signals):
     return reshape
     
 def inference_cov12(signals):
-    with tf.variable_scope('conv1_5') as scope:
+    with tf.variable_scope('conv1_02_04_05') as scope:
            kernel = _variable_with_weight_decay('weights',
                                                 shape=[ 20, 1, 64],
                                                 #shape=[3, 1, 128],
@@ -191,7 +191,7 @@ def inference_cov12(signals):
            print ('<<<<<<<<<<<<<<<<<<<<Shape of conv1 :',conv1.get_shape())
            
          # pool1
-    pool1 = tf.nn.max_pool1d(conv1, ksize=[1,3,1], strides=[1,3,1],padding='VALID',name='pool1_5')
+    pool1 = tf.nn.max_pool1d(conv1, ksize=[1,3,1], strides=[1,3,1],padding='VALID',name='pool1_02_04_05')
      
     reshape = tf.keras.layers.Flatten()(pool1)
     reshape = tf.cast(reshape, tf.float64)
@@ -199,7 +199,7 @@ def inference_cov12(signals):
     return reshape
     
 def inference_cov13(signals):
-    with tf.variable_scope('conv1_6') as scope:
+    with tf.variable_scope('conv1_06') as scope:
            kernel = _variable_with_weight_decay('weights',
                                                 shape=[ 20, 1, 64],
                                                 #shape=[3, 1, 128],
@@ -213,7 +213,51 @@ def inference_cov13(signals):
            print ('<<<<<<<<<<<<<<<<<<<<Shape of conv1 :',conv1.get_shape())
            
          # pool1
-    pool1 = tf.nn.max_pool1d(conv1, ksize=[1,3,1], strides=[1,3,1],padding='VALID',name='pool1_6')
+    pool1 = tf.nn.max_pool1d(conv1, ksize=[1,3,1], strides=[1,3,1],padding='VALID',name='pool1_06')
+     
+    reshape = tf.keras.layers.Flatten()(pool1)
+    reshape = tf.cast(reshape, tf.float64)
+    
+    return reshape
+  
+def inference_cov14(signals):
+    with tf.variable_scope('conv1_07_09_10_11_12') as scope:
+           kernel = _variable_with_weight_decay('weights',
+                                                shape=[ 20, 1, 64],
+                                                #shape=[3, 1, 128],
+                                                stddev=5e-2,
+                                                wd=None)
+           biases = _variable_on_cpu('biases', [64], tf.constant_initializer(0.0))#!!!
+           conv = tf.nn.conv1d(signals, kernel, [1,11,1], padding='SAME', data_format='NWC')
+           pre_activation = tf.nn.bias_add(conv, biases)
+           conv1 = tf.nn.relu(pre_activation, name=scope.name)
+           _activation_summary(conv1)
+           print ('<<<<<<<<<<<<<<<<<<<<Shape of conv1 :',conv1.get_shape())
+           
+         # pool1
+    pool1 = tf.nn.max_pool1d(conv1, ksize=[1,3,1], strides=[1,3,1],padding='VALID',name='pool1_07_09_10_11_12')
+     
+    reshape = tf.keras.layers.Flatten()(pool1)
+    reshape = tf.cast(reshape, tf.float64)
+    
+    return reshape
+ 
+def inference_cov15(signals):
+    with tf.variable_scope('conv1_08') as scope:
+           kernel = _variable_with_weight_decay('weights',
+                                                shape=[ 20, 1, 64],
+                                                #shape=[3, 1, 128],
+                                                stddev=5e-2,
+                                                wd=None)
+           biases = _variable_on_cpu('biases', [64], tf.constant_initializer(0.0))#!!!
+           conv = tf.nn.conv1d(signals, kernel, [1,11,1], padding='SAME', data_format='NWC')
+           pre_activation = tf.nn.bias_add(conv, biases)
+           conv1 = tf.nn.relu(pre_activation, name=scope.name)
+           _activation_summary(conv1)
+           print ('<<<<<<<<<<<<<<<<<<<<Shape of conv1 :',conv1.get_shape())
+           
+         # pool1
+    pool1 = tf.nn.max_pool1d(conv1, ksize=[1,3,1], strides=[1,3,1],padding='VALID',name='pool1_08')
      
     reshape = tf.keras.layers.Flatten()(pool1)
     reshape = tf.cast(reshape, tf.float64)
@@ -447,7 +491,8 @@ def inference_output6(local4):
     
     return softmax_linear
     
-def inference1(signals,index):
+def inference1(reshape,index):
+    '''
     with tf.variable_scope('conv1'+index) as scope:
            kernel = _variable_with_weight_decay('weights',
                                                 shape=[ 20, 1, 64],
@@ -466,7 +511,7 @@ def inference1(signals,index):
      
     reshape = tf.keras.layers.Flatten()(pool1)
     reshape = tf.cast(reshape, tf.float64)
-    
+    '''
     dim = reshape.get_shape()[1]
      
     with tf.variable_scope('local2'+index) as scope:
