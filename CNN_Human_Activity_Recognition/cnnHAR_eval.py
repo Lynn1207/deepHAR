@@ -230,37 +230,37 @@ def evaluate():
     # Get images and labels for CIFAR-10.
     eval_data = FLAGS.eval_data == 'test'
     signals, labels,indices = cnnHAR.inputs(eval_data=eval_data)
-    
+
     # Build a Graph that computes the logits predictions from the
     # inference model.
     logits1=cnnHAR.inference1(signals,'_01')
     logits2=cnnHAR.inference1(signals,'_02')
     logits3=cnnHAR.inference1(signals,'_03')
     logits4=cnnHAR.inference1(signals,'_04')
-   logits5=cnnHAR.inference1(signals,'_05')
-   logits6=cnnHAR.inference1(signals,'_06')
-   logits7=cnnHAR.inference1(signals,'_07')
-   logits8=cnnHAR.inference1(signals,'_08')
-   logits9=cnnHAR.inference1(signals,'_09')
-   logits10=cnnHAR.inference1(signals,'_10')
-   logits11=cnnHAR.inference1(signals,'_11')
-   logits12=cnnHAR.inference1(signals,'_12')
-   
-   loss1=cnnHAR.loss(logits1, labels,'_01')
-   loss2=cnnHAR.loss(logits2, labels,'_02')
-   loss3=cnnHAR.loss(logits3, labels,'_03')
-   loss4=cnnHAR.loss(logits4, labels,'_04')
-   loss5=cnnHAR.loss(logits5, labels,'_05')
-   loss6=cnnHAR.loss(logits6, labels,'_06')
-   loss7=cnnHAR.loss(logits7, labels,'_07')
-   loss8=cnnHAR.loss(logits8, labels,'_08')
-   loss9=cnnHAR.loss(logits9, labels,'_09')
-   loss10=cnnHAR.loss(logits10, labels,'_10')
-   loss11=cnnHAR.loss(logits11, labels,'_11')
-   loss12=cnnHAR.loss(logits12, labels,'_12')
-   
-    
-    
+    logits5=cnnHAR.inference1(signals,'_05')
+    logits6=cnnHAR.inference1(signals,'_06')
+    logits7=cnnHAR.inference1(signals,'_07')
+    logits8=cnnHAR.inference1(signals,'_08')
+    logits9=cnnHAR.inference1(signals,'_09')
+    logits10=cnnHAR.inference1(signals,'_10')
+    logits11=cnnHAR.inference1(signals,'_11')
+    logits12=cnnHAR.inference1(signals,'_12')
+
+    loss1=cnnHAR.loss(logits1, labels,'_01')
+    loss2=cnnHAR.loss(logits2, labels,'_02')
+    loss3=cnnHAR.loss(logits3, labels,'_03')
+    loss4=cnnHAR.loss(logits4, labels,'_04')
+    loss5=cnnHAR.loss(logits5, labels,'_05')
+    loss6=cnnHAR.loss(logits6, labels,'_06')
+    loss7=cnnHAR.loss(logits7, labels,'_07')
+    loss8=cnnHAR.loss(logits8, labels,'_08')
+    loss9=cnnHAR.loss(logits9, labels,'_09')
+    loss10=cnnHAR.loss(logits10, labels,'_10')
+    loss11=cnnHAR.loss(logits11, labels,'_11')
+    loss12=cnnHAR.loss(logits12, labels,'_12')
+
+
+
     # Restore the moving average version of the learned variables for eval.
     variable_averages = tf.train.ExponentialMovingAverage(
         cnnHAR.MOVING_AVERAGE_DECAY)
