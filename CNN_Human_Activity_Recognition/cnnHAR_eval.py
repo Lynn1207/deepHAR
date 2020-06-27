@@ -47,11 +47,11 @@ num=12 #number of nodes
 
 FLAGS = tf.app.flags.FLAGS
 
-tf.app.flags.DEFINE_string('eval_dir', '/Users/lynn/Documents/CNN_Human_Activity_Recognition/cnnHAR_e',
+tf.app.flags.DEFINE_string('eval_dir', '/home/ubuntu/deepHAR/CNN_Human_Activity_Recognition/cnnHAR_e',
                            """Directory where to write event logs.""")
 tf.app.flags.DEFINE_string('eval_data', 'test',
                            """Either 'test' or 'train_eval'.""")
-tf.app.flags.DEFINE_string('checkpoint_dir', '/Users/lynn/Documents/CNN_Human_Activity_Recognition/cnnHAR_check',
+tf.app.flags.DEFINE_string('checkpoint_dir', '/home/ubuntu/deepHAR/CNN_Human_Activity_Recognition/cnnHAR_check',
                            """Directory where to read model checkpoints.""")
 tf.app.flags.DEFINE_integer('eval_interval_secs', 60 * 5,
                             """How often to run the eval.""")
@@ -233,10 +233,10 @@ def evaluate():
     
     # Build a Graph that computes the logits predictions from the
     # inference model.
-   logits1=cnnHAR.inference1(signals,'_01')
-   logits2=cnnHAR.inference1(signals,'_02')
-   logits3=cnnHAR.inference1(signals,'_03')
-   logits4=cnnHAR.inference1(signals,'_04')
+    logits1=cnnHAR.inference1(signals,'_01')
+    logits2=cnnHAR.inference1(signals,'_02')
+    logits3=cnnHAR.inference1(signals,'_03')
+    logits4=cnnHAR.inference1(signals,'_04')
    logits5=cnnHAR.inference1(signals,'_05')
    logits6=cnnHAR.inference1(signals,'_06')
    logits7=cnnHAR.inference1(signals,'_07')
