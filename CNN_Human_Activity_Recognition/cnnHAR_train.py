@@ -49,11 +49,13 @@ import cnnHAR_eval
 
 train_dir = '/Users/lynn/Documents/CNN_Human_Activity_Recognition/cnnHAR_check'
 
-max_steps = 84*220+1
+num=12 # number of nodes
+
+max_steps = num*7*4*110+1
 
 log_device_placement = False
 
-log_frequency = 42*4 #
+log_frequency = num*7*4 #
 
 batch_size = cnnHAR.batch_size
 
@@ -85,26 +87,46 @@ def train():
     local42=cnnHAR.inference_local42(local31)
     local43=cnnHAR.inference_local43(local32)
     '''
-    logits1=cnnHAR.inference1(signals,'_1')
-    logits2=cnnHAR.inference1(signals,'_2')
-    logits3=cnnHAR.inference1(signals,'_3')
-    logits4=cnnHAR.inference1(signals,'_4')
-    logits5=cnnHAR.inference1(signals,'_5')
-    logits6=cnnHAR.inference1(signals,'_6')
+
+    logits1=cnnHAR.inference1(signals,'_01')
+    logits2=cnnHAR.inference1(signals,'_02')
+    logits3=cnnHAR.inference1(signals,'_03')
+    logits4=cnnHAR.inference1(signals,'_04')
+    logits5=cnnHAR.inference1(signals,'_05')
+    logits6=cnnHAR.inference1(signals,'_06')
+    logits7=cnnHAR.inference1(signals,'_07')
+    logits8=cnnHAR.inference1(signals,'_08')
+    logits9=cnnHAR.inference1(signals,'_09')
+    logits10=cnnHAR.inference1(signals,'_10')
+    logits11=cnnHAR.inference1(signals,'_11')
+    logits12=cnnHAR.inference1(signals,'_12')
     
-    loss1=cnnHAR.loss(logits1, labels,'_1')
-    loss2=cnnHAR.loss(logits2, labels,'_2')
-    loss3=cnnHAR.loss(logits3, labels,'_3')
-    loss4=cnnHAR.loss(logits4, labels,'_4')
-    loss5=cnnHAR.loss(logits5, labels,'_5')
-    loss6=cnnHAR.loss(logits6, labels,'_6')
+    loss1=cnnHAR.loss(logits1, labels,'_01')
+    loss2=cnnHAR.loss(logits2, labels,'_02')
+    loss3=cnnHAR.loss(logits3, labels,'_03')
+    loss4=cnnHAR.loss(logits4, labels,'_04')
+    loss5=cnnHAR.loss(logits5, labels,'_05')
+    loss6=cnnHAR.loss(logits6, labels,'_06')
+    loss7=cnnHAR.loss(logits7, labels,'_07')
+    loss8=cnnHAR.loss(logits8, labels,'_08')
+    loss9=cnnHAR.loss(logits9, labels,'_09')
+    loss10=cnnHAR.loss(logits10, labels,'_10')
+    loss11=cnnHAR.loss(logits11, labels,'_11')
+    loss12=cnnHAR.loss(logits12, labels,'_12')
     
-    train_op1 = cnnHAR.train(loss1, global_step,'_1')
-    train_op2 = cnnHAR.train(loss2, global_step,'_2')
-    train_op3 = cnnHAR.train(loss3, global_step,'_3')
-    train_op4 = cnnHAR.train(loss4, global_step,'_4')
-    train_op5 = cnnHAR.train(loss5, global_step,'_5')
-    train_op6 = cnnHAR.train(loss6, global_step,'_6')
+    train_op1 = cnnHAR.train(loss1, global_step,'_01')
+    train_op2 = cnnHAR.train(loss2, global_step,'_02')
+    train_op3 = cnnHAR.train(loss3, global_step,'_03')
+    train_op4 = cnnHAR.train(loss4, global_step,'_04')
+    train_op5 = cnnHAR.train(loss5, global_step,'_05')
+    train_op6 = cnnHAR.train(loss6, global_step,'_06')
+    train_op7 = cnnHAR.train(loss7, global_step,'_07')
+    train_op8 = cnnHAR.train(loss8, global_step,'_08')
+    train_op9 = cnnHAR.train(loss9, global_step,'_09')
+    train_op10 = cnnHAR.train(loss10, global_step,'_10')
+    train_op11 = cnnHAR.train(loss11, global_step,'_11')
+    train_op12 = cnnHAR.train(loss12, global_step,'_12')
+    
     
     
     extra_update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
@@ -203,7 +225,7 @@ def train():
         #mon_sess.run([train_op1,extra_update_ops])
         #print('~~~~~~~~~~~~~~~~%d step:'%i)
         
-        index=int(i%42/7)
+        index=int(i%(num*7)/7)
         if index==0:
             #print('~~~~~~~~~~~~~~~~train_op1')
             mon_sess.run([train_op1,extra_update_ops])
@@ -222,6 +244,24 @@ def train():
         elif index==5:
             #print('~~~~~~~~~~~~~~~~train_op6')
             mon_sess.run([train_op6,extra_update_ops])
+        elif index==6:
+            #print('~~~~~~~~~~~~~~~~train_op1')
+            mon_sess.run([train_op7,extra_update_ops])
+        elif index==7:
+            #print('~~~~~~~~~~~~~~~~train_op2')
+            mon_sess.run([train_op8,extra_update_ops])
+        elif index==8:
+            #print('~~~~~~~~~~~~~~~~train_op3')
+            mon_sess.run([train_op9,extra_update_ops])
+        elif index==9:
+            #print('~~~~~~~~~~~~~~~~train_op4')
+            mon_sess.run([train_op10,extra_update_ops])
+        elif index==10:
+            #print('~~~~~~~~~~~~~~~~train_op5')
+            mon_sess.run([train_op11,extra_update_ops])
+        elif index==11:
+            #print('~~~~~~~~~~~~~~~~train_op6')
+            mon_sess.run([train_op12,extra_update_ops])
         i=i+1
         
         #print('~~~~~~~~~~~~~~~~one session ends~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')

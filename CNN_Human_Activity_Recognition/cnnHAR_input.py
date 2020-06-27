@@ -31,12 +31,13 @@ import tensorflow.compat.v1 as tf
 # architecture will change and any model would need to be retrained.
 SIGNAL_SIZE = 128
 channels = 1
+num=12
 
 
 # Global constants describing the CIFAR-10 data set.
 NUM_CLASSES = 6
-NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = 224
-NUM_EXAMPLES_PER_EPOCH_FOR_EVAL = 128
+NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = 32*num
+NUM_EXAMPLES_PER_EPOCH_FOR_EVAL = 128*num/6
 
 def read_cnnHAR(filename_queue):
 
