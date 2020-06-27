@@ -267,7 +267,7 @@ def inference_cov15(signals):
 def inference_local21(reshape):
     dim = reshape.get_shape()[1]
      
-    with tf.variable_scope('local2_01_02_05') as scope:
+    with tf.variable_scope('local2_01_02_03_04_05_06') as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[dim, 1024],
                                               stddev=0.04, wd=None)
@@ -282,7 +282,7 @@ def inference_local21(reshape):
 def inference_local22(reshape):
     dim = reshape.get_shape()[1]
      
-    with tf.variable_scope('local2_03_04') as scope:
+    with tf.variable_scope('local2_07_08_09_10_11_12') as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[dim, 1024],
                                               stddev=0.04, wd=None)
