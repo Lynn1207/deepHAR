@@ -418,7 +418,7 @@ def inference_local35(local2):
     return local3
     
 def inference_local41(local3):
-    with tf.variable_scope('local4_01_03_04_05_06') as scope:
+    with tf.variable_scope('local4_01') as scope:
         weights = _variable_with_weight_decay('weights', shape=[512, 30], stddev=0.04, wd=None)
         biases = _variable_on_cpu('biases', [30], tf.constant_initializer(0.10))
             
@@ -429,7 +429,7 @@ def inference_local41(local3):
     return local4
     
 def inference_local42(local3):
-    with tf.variable_scope('local4_02') as scope:
+    with tf.variable_scope('local4_02_07_12') as scope:
         weights = _variable_with_weight_decay('weights', shape=[512, 30], stddev=0.04, wd=None)
         biases = _variable_on_cpu('biases', [30], tf.constant_initializer(0.10))
             
@@ -440,7 +440,7 @@ def inference_local42(local3):
     return local4
     
 def inference_local43(local3):
-    with tf.variable_scope('local4_07_10_11_12') as scope:
+    with tf.variable_scope('local4_03_04_05_06_09_10') as scope:
         weights = _variable_with_weight_decay('weights', shape=[512, 30], stddev=0.04, wd=None)
         biases = _variable_on_cpu('biases', [30], tf.constant_initializer(0.10))
             
@@ -451,7 +451,7 @@ def inference_local43(local3):
     return local4
     
 def inference_local44(local3):
-    with tf.variable_scope('local4_08_09') as scope:
+    with tf.variable_scope('local4_08') as scope:
         weights = _variable_with_weight_decay('weights', shape=[512, 30], stddev=0.04, wd=None)
         biases = _variable_on_cpu('biases', [30], tf.constant_initializer(0.10))
             
@@ -462,7 +462,7 @@ def inference_local44(local3):
     return local4
     
 def inference_local45(local3):
-    with tf.variable_scope('local4_08_09') as scope:
+    with tf.variable_scope('local4_11') as scope:
         weights = _variable_with_weight_decay('weights', shape=[512, 30], stddev=0.04, wd=None)
         biases = _variable_on_cpu('biases', [30], tf.constant_initializer(0.10))
             
@@ -473,7 +473,7 @@ def inference_local45(local3):
     return local4
     
     
-def inference1(local3,index):
+def inference1(local4,index):
     '''
     with tf.variable_scope('conv1'+index) as scope:
            kernel = _variable_with_weight_decay('weights',
@@ -515,7 +515,7 @@ def inference1(local3,index):
         local3 = tf.nn.relu(tf.matmul(local2, weights) + biases, name=scope.name)
         print ('!!!!!!!!!!!!!!!Shape of local3 :', local3.get_shape())
         _activation_summary(local3)
-    '''
+    
     with tf.variable_scope('local4'+index) as scope:
         weights = _variable_with_weight_decay('weights', shape=[512, 30], stddev=0.04, wd=None)
         biases = _variable_on_cpu('biases', [30], tf.constant_initializer(0.10))
@@ -523,7 +523,7 @@ def inference1(local3,index):
         local4 = tf.nn.relu(tf.matmul(local3, weights) + biases, name=scope.name)
         print ('!!!!!!!!!!!!!!!Shape of local4 :', local4.get_shape())#256
         _activation_summary(local4)
-    
+    '''
     with tf.variable_scope('softmax_linear'+index) as scope:
           weights = _variable_with_weight_decay('weights', [30, NUM_CLASSES],stddev=1/30.0, wd=None)
           biases = _variable_on_cpu('biases', [NUM_CLASSES],tf.constant_initializer(0.0))
