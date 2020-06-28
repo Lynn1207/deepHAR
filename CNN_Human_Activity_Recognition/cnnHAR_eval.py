@@ -104,7 +104,7 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
       cnts=np.zeros(2*num)
       steps=np.zeros(2*num)
       while step < num_iter and not coord.should_stop():
-        print('!!!!!!the step', step)
+        #print('!!!!!!the step', step)
         #local test
         if int(step/2)==0:
             samplelabels,predictions,precision=sess.run([labels,logits1,loss1])
@@ -230,13 +230,20 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
         
       i=0
       while i<2*num:
-        print('!!!!!!!!!!!!!!!!!!!! subject %s (%s records): test loss = %.3f, accuracy=%.3f' % (i, steps[i],cnts[i],accuracies[i]))
+        print('!!!!!!!!!!!!!!!!!!!! subject %s (%s records): test loss = %.3f, accuracy=%.3f' % (i%num, steps[i],cnts[i],accuracies[i]))
         i+=1
         
       print('(locally test)!!!!!!!!!!!!!!!!!!!! %s: average_test loss = %.3f, average_accuracy=%.3f' % (datetime.now(), np.mean(cnts[0:num]),np.mean(accuracies[0:num])))
       
       print('(test on 7)!!!!!!!!!!!!!!!!!!!! %s: average_test loss = %.3f, average_accuracy=%.3f' % (datetime.now(), np.mean(cnts[num:2*num]),np.mean(accuracies[num:2*num])))
     
+      for i in range(0, 24):
+            #print('label:',int(samplelabels[i][0][0]))
+            #print('prediction:',np.argmax(predictions[i]))
+            print('subject %s, loss:%.3f'% (np.argmax(cnts[num:2*num])+1,cnts[np.argmax(cnts[num:2*num])]))
+            cnts[np.argmax(cnts[num:2*num])]=-1
+            
+                
       summary = tf.Summary()
       summary.ParseFromString(sess.run(summary_op))
       summary.value.add(tag='loss @ 1', simple_value=precision)
@@ -257,31 +264,39 @@ def evaluate():
 
     # Build a Graph that computes the logits predictions from the
     # inference model.
+    reshape1=cnnHAR.inference_cov11(signals)
+    reshape2=cnnHAR.inference_cov12(signals)
+    reshape3=cnnHAR.inference_cov13(signals)
+    reshape4=cnnHAR.inference_cov14(signals)
+    reshape5=cnnHAR.inference_cov15(signals)
+    reshape6=cnnHAR.inference_cov16(signals)
+    reshape7=cnnHAR.inference_cov17(signals)
+    reshape8=cnnHAR.inference_cov18(signals)
     
-    logits1=cnnHAR.inference1(signals,'_01')
-    logits2=cnnHAR.inference1(signals,'_02')
-    logits3=cnnHAR.inference1(signals,'_03')
-    logits4=cnnHAR.inference1(signals,'_04')
-    logits5=cnnHAR.inference1(signals,'_05')
-    logits6=cnnHAR.inference1(signals,'_06')
-    logits7=cnnHAR.inference1(signals,'_07')
-    logits8=cnnHAR.inference1(signals,'_08')
-    logits9=cnnHAR.inference1(signals,'_09')
-    logits10=cnnHAR.inference1(signals,'_10')
-    logits11=cnnHAR.inference1(signals,'_11')
-    logits12=cnnHAR.inference1(signals,'_12')
-    logits13=cnnHAR.inference1(signals,'_13')
-    logits14=cnnHAR.inference1(signals,'_14')
-    logits15=cnnHAR.inference1(signals,'_15')
-    logits16=cnnHAR.inference1(signals,'_16')
-    logits17=cnnHAR.inference1(signals,'_17')
-    logits18=cnnHAR.inference1(signals,'_18')
-    logits19=cnnHAR.inference1(signals,'_19')
-    logits20=cnnHAR.inference1(signals,'_20')
-    logits21=cnnHAR.inference1(signals,'_21')
-    logits22=cnnHAR.inference1(signals,'_22')
-    logits23=cnnHAR.inference1(signals,'_23')
-    logits24=cnnHAR.inference1(signals,'_24')
+    logits1=cnnHAR.inference1(reshape1,'_01')
+    logits2=cnnHAR.inference1(reshape2,'_02')
+    logits3=cnnHAR.inference1(reshape3,'_03')
+    logits4=cnnHAR.inference1(reshape4,'_04')
+    logits5=cnnHAR.inference1(reshape5,'_05')
+    logits6=cnnHAR.inference1(reshape4,'_06')
+    logits7=cnnHAR.inference1(reshape6,'_07')
+    logits8=cnnHAR.inference1(reshape7,'_08')
+    logits9=cnnHAR.inference1(reshape6,'_09')
+    logits10=cnnHAR.inference1(reshape6,'_10')
+    logits11=cnnHAR.inference1(reshape6,'_11')
+    logits12=cnnHAR.inference1(reshape6,'_12')
+    logits13=cnnHAR.inference1(reshape2,'_13')
+    logits14=cnnHAR.inference1(reshape6,'_14')
+    logits15=cnnHAR.inference1(reshape6,'_15')
+    logits16=cnnHAR.inference1(reshape6,'_16')
+    logits17=cnnHAR.inference1(reshape6,'_17')
+    logits18=cnnHAR.inference1(reshape6,'_18')
+    logits19=cnnHAR.inference1(reshape6,'_19')
+    logits20=cnnHAR.inference1(reshape4,'_20')
+    logits21=cnnHAR.inference1(reshape6,'_21')
+    logits22=cnnHAR.inference1(reshape6,'_22')
+    logits23=cnnHAR.inference1(reshape8,'_23')
+    logits24=cnnHAR.inference1(reshape6,'_24')
     
     loss1=cnnHAR.loss(logits1, labels,'_01')
     loss2=cnnHAR.loss(logits2, labels,'_02')
