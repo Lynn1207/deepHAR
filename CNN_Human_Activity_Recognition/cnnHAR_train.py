@@ -89,16 +89,15 @@ def train():
     '''
     reshape1=cnnHAR.inference_cov11(signals)
     reshape2=cnnHAR.inference_cov12(signals)
-    reshape3=cnnHAR.inference_cov13(signals)
     
     logits1=cnnHAR.inference1(reshape1,'_01')
-    logits2=cnnHAR.inference1(reshape2,'_02')
+    logits2=cnnHAR.inference1(reshape1,'_02')
     logits3=cnnHAR.inference1(reshape1,'_03')
     logits4=cnnHAR.inference1(reshape1,'_04')
     logits5=cnnHAR.inference1(reshape1,'_05')
     logits6=cnnHAR.inference1(reshape1,'_06')
     logits7=cnnHAR.inference1(reshape1,'_07')
-    logits8=cnnHAR.inference1(reshape3,'_08')
+    logits8=cnnHAR.inference1(reshape2,'_08')
     logits9=cnnHAR.inference1(reshape1,'_09')
     logits10=cnnHAR.inference1(reshape1,'_10')
     logits11=cnnHAR.inference1(reshape1,'_11')
