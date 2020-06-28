@@ -266,7 +266,7 @@ def evaluate():
     # inference model.
     
     reshape1=cnnHAR.inference_cov11(signals)
-    reshape2=cnnHAR.inference_cov12(signals)]
+    reshape2=cnnHAR.inference_cov12(signals)
     
     logits1=cnnHAR.inference1(reshape1,'_01')
     logits2=cnnHAR.inference1(reshape2,'_02')
