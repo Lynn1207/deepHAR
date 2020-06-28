@@ -107,149 +107,101 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
         print('!!!!!!the step', step)
         #local test
         if int(step/2)==0:
-            print('~~~~loss1')
             samplelabels,predictions,precision=sess.run([labels,logits1,loss1])
         elif int(step/2)==1:
-            print('~~~~loss2')
             samplelabels,predictions,precision=sess.run([labels,logits2,loss2])
         elif int(step/2)==2:
-            print('~~~~loss3')
             samplelabels,predictions,precision=sess.run([labels,logits3,loss3])
         elif int(step/2)==3:
-            print('~~~~loss4')
             samplelabels,predictions,precision=sess.run([labels,logits4,loss4])
         elif int(step/2)==4:
-            print('~~~~loss5')
             samplelabels,predictions,precision=sess.run([labels,logits5,loss5])
         elif int(step/2)==5:
-            print('~~~~loss6')
             samplelabels,predictions,precision=sess.run([labels,logits6,loss6])
         elif int(step/2)==6:
-            print('~~~~loss7')
             samplelabels,predictions,precision=sess.run([labels,logits7,loss7])
         elif int(step/2)==7:
-            print('~~~~loss8')
             samplelabels,predictions,precision=sess.run([labels,logits8,loss8])
         elif int(step/2)==8:
-            print('~~~~loss9')
             samplelabels,predictions,precision=sess.run([labels,logits9,loss9])
         elif int(step/2)==9:
-            print('~~~~loss10')
             samplelabels,predictions,precision=sess.run([labels,logits10,loss10])
         elif int(step/2)==10:
-            print('~~~~loss11')
             samplelabels,predictions,precision=sess.run([labels,logits11,loss11])
         elif int(step/2)==11:
-            print('~~~~loss12')
             samplelabels,predictions,precision=sess.run([labels,logits12,loss12]) 
         elif int(step/2)==12:
-            print('~~~~loss12')
             samplelabels,predictions,precision=sess.run([labels,logits13,loss13])
         elif int(step/2)==13:
-            print('~~~~loss1')
             samplelabels,predictions,precision=sess.run([labels,logits14,loss14])
         elif int(step/2)==14:
-            print('~~~~loss2')
             samplelabels,predictions,precision=sess.run([labels,logits15,loss15])
         elif int(step/2)==15:
-            print('~~~~loss3')
             samplelabels,predictions,precision=sess.run([labels,logits16,loss16])
         elif int(step/2)==16:
-            print('~~~~loss4')
             samplelabels,predictions,precision=sess.run([labels,logits17,loss17])
         elif int(step/2)==17:
-            print('~~~~loss5')
             samplelabels,predictions,precision=sess.run([labels,logits18,loss18])
         elif int(step/2)==18:
-            print('~~~~loss6')
             samplelabels,predictions,precision=sess.run([labels,logits19,loss19])
         elif int(step/2)==19:
-            print('~~~~loss7')
             samplelabels,predictions,precision=sess.run([labels,logits20,loss20])
         elif int(step/2)==20:
-            print('~~~~loss8')
             samplelabels,predictions,precision=sess.run([labels,logits21,loss21])
         elif int(step/2)==21:
-            print('~~~~loss9')
             samplelabels,predictions,precision=sess.run([labels,logits22,loss22])
         elif int(step/2)==22:
-            print('~~~~loss10')
             samplelabels,predictions,precision=sess.run([labels,logits23,loss23])
         elif int(step/2)==23:
-            print('~~~~loss11')
             samplelabels,predictions,precision=sess.run([labels,logits24,loss24])
         #test on 7
         if int(step/2)==24:
-            print('~~~~loss1')
             samplelabels,predictions,precision=sess.run([labels,logits1,loss1])
         elif int(step/2)==25:
-            print('~~~~loss2')
             samplelabels,predictions,precision=sess.run([labels,logits2,loss2])
         elif int(step/2)==26:
-            print('~~~~loss3')
             samplelabels,predictions,precision=sess.run([labels,logits3,loss3])
         elif int(step/2)==27:
-            print('~~~~loss4')
             samplelabels,predictions,precision=sess.run([labels,logits4,loss4])
         elif int(step/2)==28:
-            print('~~~~loss5')
             samplelabels,predictions,precision=sess.run([labels,logits5,loss5])
         elif int(step/2)==29:
-            print('~~~~loss6')
             samplelabels,predictions,precision=sess.run([labels,logits6,loss6])
         elif int(step/2)==30:
-            print('~~~~loss7')
             samplelabels,predictions,precision=sess.run([labels,logits7,loss7])
         elif int(step/2)==31:
-            print('~~~~loss8')
             samplelabels,predictions,precision=sess.run([labels,logits8,loss8])
         elif int(step/2)==32:
-            print('~~~~loss9')
             samplelabels,predictions,precision=sess.run([labels,logits9,loss9])
         elif int(step/2)==33:
-            print('~~~~loss10')
             samplelabels,predictions,precision=sess.run([labels,logits10,loss10])
         elif int(step/2)==34:
-            print('~~~~loss11')
             samplelabels,predictions,precision=sess.run([labels,logits11,loss11])
         elif int(step/2)==35:
-            print('~~~~loss12')
             samplelabels,predictions,precision=sess.run([labels,logits12,loss12])
         elif int(step/2)==36:
-            print('~~~~loss12')
             samplelabels,predictions,precision=sess.run([labels,logits13,loss13])
         elif int(step/2)==37:
-            print('~~~~loss1')
             samplelabels,predictions,precision=sess.run([labels,logits14,loss14])
         elif int(step/2)==38:
-            print('~~~~loss2')
             samplelabels,predictions,precision=sess.run([labels,logits15,loss15])
         elif int(step/2)==39:
-            print('~~~~loss3')
             samplelabels,predictions,precision=sess.run([labels,logits16,loss16])
         elif int(step/2)==40:
-            print('~~~~loss4')
             samplelabels,predictions,precision=sess.run([labels,logits17,loss17])
         elif int(step/2)==41:
-            print('~~~~loss5')
             samplelabels,predictions,precision=sess.run([labels,logits18,loss18])
         elif int(step/2)==42:
-            print('~~~~loss6')
             samplelabels,predictions,precision=sess.run([labels,logits19,loss19])
         elif int(step/2)==43:
-            print('~~~~loss7')
             samplelabels,predictions,precision=sess.run([labels,logits20,loss20])
         elif int(step/2)==44:
-            print('~~~~loss8')
             samplelabels,predictions,precision=sess.run([labels,logits21,loss21])
         elif int(step/2)==45:
-            print('~~~~loss9')
             samplelabels,predictions,precision=sess.run([labels,logits22,loss22])
         elif int(step/2)==46:
-            print('~~~~loss10')
             samplelabels,predictions,precision=sess.run([labels,logits23,loss23])
         elif int(step/2)==47:
-            print('~~~~loss11')
             samplelabels,predictions,precision=sess.run([labels,logits24,loss24])
        
         #print('!!!!!!the index of t/????????????????/he whole batch %f /n' % output3[0][0][0])
