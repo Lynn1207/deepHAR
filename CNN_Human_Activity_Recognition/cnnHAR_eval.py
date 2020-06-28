@@ -151,7 +151,7 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
         elif int(step/2)==14:
             print('~~~~loss2')
             samplelabels,predictions,precision=sess.run([labels,logits15,loss15])
-        elif int(step/2)=15:
+        elif int(step/2)==15:
             print('~~~~loss3')
             samplelabels,predictions,precision=sess.run([labels,logits16,loss16])
         elif int(step/2)==16:
