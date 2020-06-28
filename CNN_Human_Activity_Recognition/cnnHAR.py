@@ -485,7 +485,7 @@ def inference1(signals,index):
            pre_activation = tf.nn.bias_add(conv, biases)
            conv1 = tf.nn.relu(pre_activation, name=scope.name)
            _activation_summary(conv1)
-           print ('<<<<<<<<<<<<<<<<<<<<Shape of conv1 :',conv1.get_shape())
+           #print ('<<<<<<<<<<<<<<<<<<<<Shape of conv1 :',conv1.get_shape())
            
          # pool1
     pool1 = tf.nn.max_pool1d(conv1, ksize=[1,3,1], strides=[1,3,1],padding='VALID',name='pool1'+index)
@@ -502,7 +502,7 @@ def inference1(signals,index):
         biases = _variable_on_cpu('biases', [1024], tf.constant_initializer(0.10))
         
         local2 = tf.nn.relu(tf.matmul(reshape, weights) + biases, name=scope.name)
-        print ('!!!!!!!!!!!!!!!Shape of local2 :', local2.get_shape())
+        #print ('!!!!!!!!!!!!!!!Shape of local2 :', local2.get_shape())
         _activation_summary(local2)
     
     with tf.variable_scope('local3'+index) as scope:
@@ -512,7 +512,7 @@ def inference1(signals,index):
         biases = _variable_on_cpu('biases', [512], tf.constant_initializer(0.10))
         
         local3 = tf.nn.relu(tf.matmul(local2, weights) + biases, name=scope.name)
-        print ('!!!!!!!!!!!!!!!Shape of local3 :', local3.get_shape())
+        #print ('!!!!!!!!!!!!!!!Shape of local3 :', local3.get_shape())
         _activation_summary(local3)
     
     with tf.variable_scope('local4'+index) as scope:
@@ -520,7 +520,7 @@ def inference1(signals,index):
         biases = _variable_on_cpu('biases', [30], tf.constant_initializer(0.10))
             
         local4 = tf.nn.relu(tf.matmul(local3, weights) + biases, name=scope.name)
-        print ('!!!!!!!!!!!!!!!Shape of local4 :', local4.get_shape())#256
+        #print ('!!!!!!!!!!!!!!!Shape of local4 :', local4.get_shape())#256
         _activation_summary(local4)
     
     with tf.variable_scope('softmax_linear'+index) as scope:
@@ -536,15 +536,15 @@ def loss(logits, labels,index):
     labels = tf.cast(labels, tf.int64)
     labels = tf.reshape(labels, [batch_size,1])
     logits = tf.reshape(logits, [batch_size,1,NUM_CLASSES])
-    print('loss@@@@@@@@@@@@##############',logits.get_shape())
-    print('loss@@@@@@@@@@@@##############',labels.get_shape())
+    #print('loss@@@@@@@@@@@@##############',logits.get_shape())
+    #print('loss@@@@@@@@@@@@##############',labels.get_shape())
     i=0
     loss=0.0
     while i<batch_size:
         loss+=-tf.math.log(logits[i,0,labels[i,0]])
         i+=1
     loss=loss/batch_size
-    print('loss@@@@@@@@@@@@##############',loss)
+    #print('loss@@@@@@@@@@@@##############',loss)
     tf.add_to_collection('losses'+index, loss)
     # The total loss is defined as the cross entropy loss plus all of the weight
     # decay terms (L2 loss).
@@ -593,7 +593,7 @@ def train(total_loss, global_step,index):#index is a string e.g. '_1'
 # Add histograms for trainable variables.
  for var in tf.trainable_variables():
   tf.summary.histogram(var.op.name, var)
-  print(var.op.name)
+  #print(var.op.name)
 
 # Add histograms for gradients.
  for grad, var in grads:
