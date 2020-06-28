@@ -355,7 +355,7 @@ def inference_local26(reshape):
     return local2
     
 def inference_local31(local2):
-    with tf.variable_scope('local3_1_3_5_6') as scope:
+    with tf.variable_scope('local3_01_05') as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[1024, 512],
                                               stddev=0.04, wd=None)#0.004,index)
@@ -368,7 +368,7 @@ def inference_local31(local2):
     return local3
     
 def inference_local32(local2):
-    with tf.variable_scope('local3_2') as scope:
+    with tf.variable_scope('local3_02') as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[1024, 512],
                                               stddev=0.04, wd=None)#0.004,index)
@@ -381,7 +381,7 @@ def inference_local32(local2):
     return local3
     
 def inference_local33(local2):
-    with tf.variable_scope('local3_4') as scope:
+    with tf.variable_scope('local3_03_04_06') as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[1024, 512],
                                               stddev=0.04, wd=None)#0.004,index)
@@ -394,7 +394,20 @@ def inference_local33(local2):
     return local3
     
 def inference_local34(local2):
-    with tf.variable_scope('local3_5') as scope:
+    with tf.variable_scope('local3_07_10_11_12') as scope:
+        # Move everything into depth so we can perform a single matrix multiply.
+        weights = _variable_with_weight_decay('weights', shape=[1024, 512],
+                                              stddev=0.04, wd=None)#0.004,index)
+        biases = _variable_on_cpu('biases', [512], tf.constant_initializer(0.10))
+        
+        local3 = tf.nn.relu(tf.matmul(local2, weights) + biases, name=scope.name)
+        print ('!!!!!!!!!!!!!!!Shape of local3 :', local3.get_shape())
+        _activation_summary(local3)
+        
+    return local3
+
+def inference_local35(local2):
+    with tf.variable_scope('local3_08_09') as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[1024, 512],
                                               stddev=0.04, wd=None)#0.004,index)
@@ -521,7 +534,7 @@ def inference_output6(local4):
     
     return softmax_linear
     
-def inference1(local2,index):
+def inference1(local3,index):
     '''
     with tf.variable_scope('conv1'+index) as scope:
            kernel = _variable_with_weight_decay('weights',
@@ -553,7 +566,7 @@ def inference1(local2,index):
         local2 = tf.nn.relu(tf.matmul(reshape, weights) + biases, name=scope.name)
         print ('!!!!!!!!!!!!!!!Shape of local2 :', local2.get_shape())
         _activation_summary(local2)
-    '''
+    
     with tf.variable_scope('local3'+index) as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[1024, 512],
@@ -563,7 +576,7 @@ def inference1(local2,index):
         local3 = tf.nn.relu(tf.matmul(local2, weights) + biases, name=scope.name)
         print ('!!!!!!!!!!!!!!!Shape of local3 :', local3.get_shape())
         _activation_summary(local3)
-    
+    '''
     with tf.variable_scope('local4'+index) as scope:
         weights = _variable_with_weight_decay('weights', shape=[512, 30], stddev=0.04, wd=None)
         biases = _variable_on_cpu('biases', [30], tf.constant_initializer(0.10))
