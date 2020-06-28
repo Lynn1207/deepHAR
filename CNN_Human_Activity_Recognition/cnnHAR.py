@@ -262,7 +262,7 @@ def inference_cov15(signals):
     
     return reshape
   
-def inference_cov15(signals):
+def inference_cov16(signals):
     with tf.variable_scope('conv1_07_09_10_11_12_14_15_16_17_18_19_21_22_24') as scope:
            kernel = _variable_with_weight_decay('weights',
                                                 shape=[ 20, 1, 64],
@@ -284,7 +284,7 @@ def inference_cov15(signals):
     
     return reshape
   
-def inference_cov16(signals):
+def inference_cov17(signals):
     with tf.variable_scope('conv1_08') as scope:
            kernel = _variable_with_weight_decay('weights',
                                                 shape=[ 20, 1, 64],
@@ -306,7 +306,7 @@ def inference_cov16(signals):
     
     return reshape
 
-def inference_cov15(signals):
+def inference_cov18(signals):
     with tf.variable_scope('conv1_23') as scope:
            kernel = _variable_with_weight_decay('weights',
                                                 shape=[ 20, 1, 64],
