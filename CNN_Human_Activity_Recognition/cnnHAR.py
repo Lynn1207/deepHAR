@@ -417,7 +417,7 @@ def inference_local32(local2):
     return local3
     
 def inference_local33(local2):
-    with tf.variable_scope('local3_07_08_10_11_12_14_15_16_17_18_19_21_22_23') as scope:
+    with tf.variable_scope('local3_07_08_09_10_11_12_14_15_16_17_18_19_21_22_23') as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[1024, 512],
                                               stddev=0.04, wd=None)#0.004,index)
@@ -429,20 +429,8 @@ def inference_local33(local2):
         
     return local3
     
-def inference_local34(local2):
-    with tf.variable_scope('local3_09') as scope:
-        # Move everything into depth so we can perform a single matrix multiply.
-        weights = _variable_with_weight_decay('weights', shape=[1024, 512],
-                                              stddev=0.04, wd=None)#0.004,index)
-        biases = _variable_on_cpu('biases', [512], tf.constant_initializer(0.10))
-        
-        local3 = tf.nn.relu(tf.matmul(local2, weights) + biases, name=scope.name)
-        print ('!!!!!!!!!!!!!!!Shape of local3 :', local3.get_shape())
-        _activation_summary(local3)
-        
-    return local3
 
-def inference_local35(local2):
+def inference_local34(local2):
     with tf.variable_scope('local3_13') as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[1024, 512],
@@ -455,7 +443,7 @@ def inference_local35(local2):
         
     return local3
 
-def inference_local36(local2):
+def inference_local35(local2):
     with tf.variable_scope('local3_20') as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[1024, 512],
@@ -468,7 +456,7 @@ def inference_local36(local2):
         
     return local3
   
-def inference_local37(local2):
+def inference_local36(local2):
     with tf.variable_scope('local3_24') as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[1024, 512],
