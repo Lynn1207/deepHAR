@@ -346,7 +346,7 @@ def inference_local21(reshape):
 def inference_local22(reshape):
     dim = reshape.get_shape()[1]
      
-    with tf.variable_scope('local2_02_03_04_05_06_07_09_10_11_12') as scope:
+    with tf.variable_scope('local2_02_03_05_06') as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[dim, 1024],
                                               stddev=0.04, wd=None)
@@ -361,7 +361,7 @@ def inference_local22(reshape):
 def inference_local23(reshape):
     dim = reshape.get_shape()[1]
      
-    with tf.variable_scope('local2_08') as scope:
+    with tf.variable_scope('local2_04') as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[dim, 1024],
                                               stddev=0.04, wd=None)
@@ -376,7 +376,7 @@ def inference_local23(reshape):
 def inference_local24(reshape):
     dim = reshape.get_shape()[1]
      
-    with tf.variable_scope('local2_08') as scope:
+    with tf.variable_scope('local2_07_08_09_10_11_12_13_14_15_16_17_18_19_21_22_23_24') as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[dim, 1024],
                                               stddev=0.04, wd=None)
@@ -391,7 +391,7 @@ def inference_local24(reshape):
 def inference_local25(reshape):
     dim = reshape.get_shape()[1]
      
-    with tf.variable_scope('local2_08') as scope:
+    with tf.variable_scope('local2_20') as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[dim, 1024],
                                               stddev=0.04, wd=None)
@@ -539,7 +539,7 @@ def inference_local45(local3):
     return local4
     
     
-def inference1(reshape,index):
+def inference1(local2,index):
     '''
     with tf.variable_scope('conv1'+index) as scope:
            kernel = _variable_with_weight_decay('weights',
@@ -559,7 +559,7 @@ def inference1(reshape,index):
      
     reshape = tf.keras.layers.Flatten()(pool1)
     reshape = tf.cast(reshape, tf.float64)
-    '''
+    
     dim = reshape.get_shape()[1]
      
     with tf.variable_scope('local2'+index) as scope:
@@ -571,7 +571,7 @@ def inference1(reshape,index):
         local2 = tf.nn.relu(tf.matmul(reshape, weights) + biases, name=scope.name)
         #print ('!!!!!!!!!!!!!!!Shape of local2 :', local2.get_shape())
         _activation_summary(local2)
-    
+    '''
     with tf.variable_scope('local3'+index) as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[1024, 512],
