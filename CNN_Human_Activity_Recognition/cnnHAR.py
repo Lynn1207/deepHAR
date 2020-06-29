@@ -417,7 +417,7 @@ def inference_local32(local2):
     return local3
     
 def inference_local33(local2):
-    with tf.variable_scope('local3_07_08_09_10_11_12_14_15_16_17_18_19_21_22_23') as scope:
+    with tf.variable_scope('local3_07_08_09_10_11_12_14_15_16_17_18_19_21_22_23_24') as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[1024, 512],
                                               stddev=0.04, wd=None)#0.004,index)
