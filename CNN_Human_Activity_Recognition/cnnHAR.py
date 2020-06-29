@@ -328,10 +328,11 @@ def inference_cov18(signals):
     
     return reshape
   
+
 def inference_local21(reshape):
     dim = reshape.get_shape()[1]
      
-    with tf.variable_scope('local2_01') as scope:
+    with tf.variable_scope('local2_01_02_03_05_06') as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[dim, 1024],
                                               stddev=0.04, wd=None)
@@ -346,21 +347,6 @@ def inference_local21(reshape):
 def inference_local22(reshape):
     dim = reshape.get_shape()[1]
      
-    with tf.variable_scope('local2_02_03_05_06') as scope:
-        # Move everything into depth so we can perform a single matrix multiply.
-        weights = _variable_with_weight_decay('weights', shape=[dim, 1024],
-                                              stddev=0.04, wd=None)
-        biases = _variable_on_cpu('biases', [1024], tf.constant_initializer(0.10))
-        
-        local2 = tf.nn.relu(tf.matmul(reshape, weights) + biases, name=scope.name)
-        print ('!!!!!!!!!!!!!!!Shape of local2 :', local2.get_shape())
-        _activation_summary(local2)
-        
-    return local2
-    
-def inference_local23(reshape):
-    dim = reshape.get_shape()[1]
-     
     with tf.variable_scope('local2_04') as scope:
         # Move everything into depth so we can perform a single matrix multiply.
         weights = _variable_with_weight_decay('weights', shape=[dim, 1024],
@@ -373,7 +359,7 @@ def inference_local23(reshape):
         
     return local2
   
-def inference_local24(reshape):
+def inference_local23(reshape):
     dim = reshape.get_shape()[1]
      
     with tf.variable_scope('local2_07_08_09_10_11_12_13_14_15_16_17_18_19_21_22_23_24') as scope:
@@ -388,7 +374,7 @@ def inference_local24(reshape):
         
     return local2
  
-def inference_local25(reshape):
+def inference_local24(reshape):
     dim = reshape.get_shape()[1]
      
     with tf.variable_scope('local2_20') as scope:
