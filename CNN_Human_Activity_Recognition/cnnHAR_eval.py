@@ -225,16 +225,15 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
       print('concurrent simpleness: ')
       print(concur_s)
       
+      m=np.mean(concur_s)*num/(num-1)
+      print(m)
       for i in range(0,num):
-          m=np.mean(concur_s[i])*num/(num-1)
-          print(m)
           for j in range(0,num):
               if i!=j and concur_s[i][j]>m:
                   grouping[i][j]=1
       print('affinity: ')
       print(grouping)
-     
-      
+    
       i=0
       while i<2*num:
             print('!!!!!!!!!!!!!!!!!!!! subject %s (%s records): test loss = %.3f, accuracy=%.3f' % (i, steps[i],cnts[i],accuracies[i]))
