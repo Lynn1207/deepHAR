@@ -510,8 +510,8 @@ def loss(logits, labels,index):
     labels = tf.cast(labels, tf.int64)
     labels = tf.reshape(labels, [batch_size,1])
     logits = tf.reshape(logits, [batch_size,1,NUM_CLASSES])
-    print('loss@@@@@@@@@@@@##############',logits.get_shape())
-    print('loss@@@@@@@@@@@@##############',labels.get_shape())
+    #print('loss@@@@@@@@@@@@##############',logits.get_shape())
+    #print('loss@@@@@@@@@@@@##############',labels.get_shape())
     i=0
     loss=0.0
     while i<batch_size:
@@ -519,7 +519,7 @@ def loss(logits, labels,index):
         i+=1
     loss=loss/batch_size
     
-    print('loss@@@@@@@@@@@@##############',loss)
+    #print('loss@@@@@@@@@@@@##############',loss)
     tf.add_to_collection('losses'+index, loss)
     # The total loss is defined as the cross entropy loss plus all of the weight
     # decay terms (L2 loss).
