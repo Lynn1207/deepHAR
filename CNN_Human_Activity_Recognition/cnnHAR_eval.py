@@ -104,6 +104,7 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
       steps=np.zeros(2*num)
       simpleness=np.zeros((num,2*batch_size))
       concur_s=np.zeros((num,num))
+      grouping=np.zeros((num,num))
       while step < num_iter and not coord.should_stop():
         print('!!!!!!the step', step)
         #local test
@@ -215,13 +216,28 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
     
       print('simpleness: ')
       print(simpleness)
-      for i in range(0,num-1):
+      for i in range(0,num):
           for j in range(0,num):
-              for n in range(0, 2*batch_size):
-                  concur_s[i][j]+=simpleness[i][n]*simpleness[j][n]+(1-simpleness[i][n])*(1-simpleness[j][n])
-              concur_s[i][j]=concur_s[i][j]/(2*batch_size)
+              if i!=j:
+                  for n in range(0, 2*batch_size):
+                      concur_s[i][j]+=simpleness[i][n]*simpleness[j][n]+(1-simpleness[i][n])*(1-simpleness[j][n])
+                  concur_s[i][j]=concur_s[i][j]/(2*batch_size)
       print('concurrent simpleness: ')
       print(concur_s)
+      
+      for i in range(0,num):
+          m=np.mean(concur_s[i])*num/(num-1)
+          print(m)
+          for j in range(0,num):
+              if i!=j && concur_s[i][j]>m:
+                  grouping[i][j]=1
+      print('affinity: ')
+      print(grouping)
+                  
+      print('concurrent simpleness: ')
+      print(concur_s)
+      
+      
       
       i=0
       while i<2*num:
