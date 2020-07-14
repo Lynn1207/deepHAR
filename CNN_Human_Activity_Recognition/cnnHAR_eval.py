@@ -229,7 +229,7 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
           m=np.mean(concur_s[i])*num/(num-1)
           print(m)
           for j in range(0,num):
-              if i!=j && concur_s[i][j]>m:
+              if i!=j and concur_s[i][j]>m:
                   grouping[i][j]=1
       print('affinity: ')
       print(grouping)
