@@ -187,8 +187,8 @@ def train():
         return tf.train.SessionRunArgs(signals)  # Asks for signals.
 
       def after_run(self, run_context, run_values):
-        #if self._step % (10*log_frequency) == 0:
-        if self._step == max_steps-1:#:
+        if self._step % (10*log_frequency) == 0:
+        #if self._step == max_steps-1:#:
           #print('~~~~~~~~~~~~~~~~after run4~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
           cnnHAR_eval.main()
 
@@ -200,7 +200,7 @@ def train():
                #_LoggerHook2(),
                _LoggerHook4()],#,save_checkpoint_steps=5000
         config=tf.ConfigProto(
-            log_device_placement=log_device_placement),save_checkpoint_steps=max_steps) as mon_sess:
+            log_device_placement=log_device_placement),save_checkpoint_steps=10*log_frequency) as mon_sess:
       i=0
       while not mon_sess.should_stop():
 #        mon_sess = tfdbg.LocalCLIDebugWrapperSession(mon_sess)
