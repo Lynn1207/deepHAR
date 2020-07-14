@@ -108,22 +108,22 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
         print('!!!!!!the step', step)
         #local test
         if int(step/2)==0:
-            print('~~~~loss1')
+            #print('~~~~loss1')
             samplelabels,predictions,precision=sess.run([labels,logits1,loss1])
         elif int(step/2)==1:
-            print('~~~~loss2')
+            #print('~~~~loss2')
             samplelabels,predictions,precision=sess.run([labels,logits2,loss2])
         elif int(step/2)==2:
-            print('~~~~loss3')
+            #print('~~~~loss3')
             samplelabels,predictions,precision=sess.run([labels,logits3,loss3])
         elif int(step/2)==3:
-            print('~~~~loss4')
+            #print('~~~~loss4')
             samplelabels,predictions,precision=sess.run([labels,logits4,loss4])
         elif int(step/2)==4:
-            print('~~~~loss5')
+            #print('~~~~loss5')
             samplelabels,predictions,precision=sess.run([labels,logits5,loss5])
         elif int(step/2)==5:
-            print('~~~~loss6')
+            #print('~~~~loss6')
             samplelabels,predictions,precision=sess.run([labels,logits6,loss6])
         '''
         elif int(step/2)==6:
@@ -147,22 +147,22 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
         '''
         #test on 7
         if int(step/2)==6:
-            print('~~~~loss1')
+            #print('~~~~loss1')
             samplelabels,predictions,precision=sess.run([labels,logits1,loss1])
         elif int(step/2)==7:
-            print('~~~~loss2')
+            #print('~~~~loss2')
             samplelabels,predictions,precision=sess.run([labels,logits2,loss2])
         elif int(step/2)==8:
-            print('~~~~loss3')
+            #print('~~~~loss3')
             samplelabels,predictions,precision=sess.run([labels,logits3,loss3])
         elif int(step/2)==9:
-            print('~~~~loss4')
+            #print('~~~~loss4')
             samplelabels,predictions,precision=sess.run([labels,logits4,loss4])
         elif int(step/2)==10:
-            print('~~~~loss5')
+            #print('~~~~loss5')
             samplelabels,predictions,precision=sess.run([labels,logits5,loss5])
         elif int(step/2)==11:
-            print('~~~~loss6')
+            #print('~~~~loss6')
             samplelabels,predictions,precision=sess.run([labels,logits6,loss6])
         '''
         elif int(step/2)==12:
