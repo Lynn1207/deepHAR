@@ -43,15 +43,15 @@ import tensorflow.compat.v1 as tf
 
 import cnnHAR
 
-num=24 #number of nodes
+num=6 #number of nodes
 
 FLAGS = tf.app.flags.FLAGS
 
-tf.app.flags.DEFINE_string('eval_dir', '/home/ubuntu/deepHAR/CNN_Human_Activity_Recognition/cnnHAR_e',
+tf.app.flags.DEFINE_string('eval_dir', '/Users/lynn/Documents/CNN_Human_Activity_Recognition/cnnHAR_e',
                            """Directory where to write event logs.""")
 tf.app.flags.DEFINE_string('eval_data', 'test',
                            """Either 'test' or 'train_eval'.""")
-tf.app.flags.DEFINE_string('checkpoint_dir', '/home/ubuntu/deepHAR/CNN_Human_Activity_Recognition/cnnHAR_check',
+tf.app.flags.DEFINE_string('checkpoint_dir', '/Users/lynn/Documents/CNN_Human_Activity_Recognition/cnnHAR_check',
                            """Directory where to read model checkpoints.""")
 tf.app.flags.DEFINE_integer('eval_interval_secs', 60 * 5,
                             """How often to run the eval.""")
@@ -63,8 +63,7 @@ tf.app.flags.DEFINE_boolean('run_once', True,
 batch_size = 32
 NUM_CLASSES = cnnHAR.NUM_CLASSES
 
-def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logits3,loss4,logits4,loss5,logits5,loss6,logits6,loss7,logits7,loss8,logits8,loss9,logits9,loss10,logits10,loss11,logits11,loss12,logits12,loss13,logits13,loss14,logits14,loss15,logits15,loss16,logits16,loss17,logits17,loss18,logits18,loss19,logits19,loss20,logits20,loss21,logits21,loss22,logits22,loss23,logits23,loss24,logits24,summary_op):
-  '''loss2,logits2,loss3,logits3,loss4,logits4,loss5,logits5,loss6,logits6, '''
+def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logits3,loss4,logits4,loss5,logits5,loss6,logits6,summary_op):
   
   """Run Eval once.
 
@@ -103,107 +102,88 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
       accuracies=np.zeros(2*num)
       cnts=np.zeros(2*num)
       steps=np.zeros(2*num)
+      simpleness=np.zeros((num,2*batch_size))
+      concur_s=np.zeros((num,num))
       while step < num_iter and not coord.should_stop():
-        #print('!!!!!!the step', step)
+        print('!!!!!!the step', step)
         #local test
         if int(step/2)==0:
+            print('~~~~loss1')
             samplelabels,predictions,precision=sess.run([labels,logits1,loss1])
         elif int(step/2)==1:
+            print('~~~~loss2')
             samplelabels,predictions,precision=sess.run([labels,logits2,loss2])
         elif int(step/2)==2:
+            print('~~~~loss3')
             samplelabels,predictions,precision=sess.run([labels,logits3,loss3])
         elif int(step/2)==3:
+            print('~~~~loss4')
             samplelabels,predictions,precision=sess.run([labels,logits4,loss4])
         elif int(step/2)==4:
+            print('~~~~loss5')
             samplelabels,predictions,precision=sess.run([labels,logits5,loss5])
         elif int(step/2)==5:
+            print('~~~~loss6')
             samplelabels,predictions,precision=sess.run([labels,logits6,loss6])
+        '''
         elif int(step/2)==6:
+            print('~~~~loss7')
             samplelabels,predictions,precision=sess.run([labels,logits7,loss7])
         elif int(step/2)==7:
+            print('~~~~loss8')
             samplelabels,predictions,precision=sess.run([labels,logits8,loss8])
         elif int(step/2)==8:
+            print('~~~~loss9')
             samplelabels,predictions,precision=sess.run([labels,logits9,loss9])
         elif int(step/2)==9:
+            print('~~~~loss10')
             samplelabels,predictions,precision=sess.run([labels,logits10,loss10])
         elif int(step/2)==10:
+            print('~~~~loss11')
             samplelabels,predictions,precision=sess.run([labels,logits11,loss11])
         elif int(step/2)==11:
-            samplelabels,predictions,precision=sess.run([labels,logits12,loss12]) 
-        elif int(step/2)==12:
-            samplelabels,predictions,precision=sess.run([labels,logits13,loss13])
-        elif int(step/2)==13:
-            samplelabels,predictions,precision=sess.run([labels,logits14,loss14])
-        elif int(step/2)==14:
-            samplelabels,predictions,precision=sess.run([labels,logits15,loss15])
-        elif int(step/2)==15:
-            samplelabels,predictions,precision=sess.run([labels,logits16,loss16])
-        elif int(step/2)==16:
-            samplelabels,predictions,precision=sess.run([labels,logits17,loss17])
-        elif int(step/2)==17:
-            samplelabels,predictions,precision=sess.run([labels,logits18,loss18])
-        elif int(step/2)==18:
-            samplelabels,predictions,precision=sess.run([labels,logits19,loss19])
-        elif int(step/2)==19:
-            samplelabels,predictions,precision=sess.run([labels,logits20,loss20])
-        elif int(step/2)==20:
-            samplelabels,predictions,precision=sess.run([labels,logits21,loss21])
-        elif int(step/2)==21:
-            samplelabels,predictions,precision=sess.run([labels,logits22,loss22])
-        elif int(step/2)==22:
-            samplelabels,predictions,precision=sess.run([labels,logits23,loss23])
-        elif int(step/2)==23:
-            samplelabels,predictions,precision=sess.run([labels,logits24,loss24])
-        #test on 7
-        if int(step/2)==24:
-            samplelabels,predictions,precision=sess.run([labels,logits1,loss1])
-        elif int(step/2)==25:
-            samplelabels,predictions,precision=sess.run([labels,logits2,loss2])
-        elif int(step/2)==26:
-            samplelabels,predictions,precision=sess.run([labels,logits3,loss3])
-        elif int(step/2)==27:
-            samplelabels,predictions,precision=sess.run([labels,logits4,loss4])
-        elif int(step/2)==28:
-            samplelabels,predictions,precision=sess.run([labels,logits5,loss5])
-        elif int(step/2)==29:
-            samplelabels,predictions,precision=sess.run([labels,logits6,loss6])
-        elif int(step/2)==30:
-            samplelabels,predictions,precision=sess.run([labels,logits7,loss7])
-        elif int(step/2)==31:
-            samplelabels,predictions,precision=sess.run([labels,logits8,loss8])
-        elif int(step/2)==32:
-            samplelabels,predictions,precision=sess.run([labels,logits9,loss9])
-        elif int(step/2)==33:
-            samplelabels,predictions,precision=sess.run([labels,logits10,loss10])
-        elif int(step/2)==34:
-            samplelabels,predictions,precision=sess.run([labels,logits11,loss11])
-        elif int(step/2)==35:
+            print('~~~~loss12')
             samplelabels,predictions,precision=sess.run([labels,logits12,loss12])
-        elif int(step/2)==36:
-            samplelabels,predictions,precision=sess.run([labels,logits13,loss13])
-        elif int(step/2)==37:
-            samplelabels,predictions,precision=sess.run([labels,logits14,loss14])
-        elif int(step/2)==38:
-            samplelabels,predictions,precision=sess.run([labels,logits15,loss15])
-        elif int(step/2)==39:
-            samplelabels,predictions,precision=sess.run([labels,logits16,loss16])
-        elif int(step/2)==40:
-            samplelabels,predictions,precision=sess.run([labels,logits17,loss17])
-        elif int(step/2)==41:
-            samplelabels,predictions,precision=sess.run([labels,logits18,loss18])
-        elif int(step/2)==42:
-            samplelabels,predictions,precision=sess.run([labels,logits19,loss19])
-        elif int(step/2)==43:
-            samplelabels,predictions,precision=sess.run([labels,logits20,loss20])
-        elif int(step/2)==44:
-            samplelabels,predictions,precision=sess.run([labels,logits21,loss21])
-        elif int(step/2)==45:
-            samplelabels,predictions,precision=sess.run([labels,logits22,loss22])
-        elif int(step/2)==46:
-            samplelabels,predictions,precision=sess.run([labels,logits23,loss23])
-        elif int(step/2)==47:
-            samplelabels,predictions,precision=sess.run([labels,logits24,loss24])
-       
+        '''
+        #test on 7
+        if int(step/2)==6:
+            print('~~~~loss1')
+            samplelabels,predictions,precision=sess.run([labels,logits1,loss1])
+        elif int(step/2)==7:
+            print('~~~~loss2')
+            samplelabels,predictions,precision=sess.run([labels,logits2,loss2])
+        elif int(step/2)==8:
+            print('~~~~loss3')
+            samplelabels,predictions,precision=sess.run([labels,logits3,loss3])
+        elif int(step/2)==9:
+            print('~~~~loss4')
+            samplelabels,predictions,precision=sess.run([labels,logits4,loss4])
+        elif int(step/2)==10:
+            print('~~~~loss5')
+            samplelabels,predictions,precision=sess.run([labels,logits5,loss5])
+        elif int(step/2)==11:
+            print('~~~~loss6')
+            samplelabels,predictions,precision=sess.run([labels,logits6,loss6])
+        '''
+        elif int(step/2)==12:
+            print('~~~~loss7')
+            samplelabels,predictions,precision=sess.run([labels,logits7,loss7])
+        elif int(step/2)==19:
+            print('~~~~loss8')
+            samplelabels,predictions,precision=sess.run([labels,logits8,loss8])
+        elif int(step/2)==20:
+            print('~~~~loss9')
+            samplelabels,predictions,precision=sess.run([labels,logits9,loss9])
+        elif int(step/2)==21:
+            print('~~~~loss10')
+            samplelabels,predictions,precision=sess.run([labels,logits10,loss10])
+        elif int(step/2)==22:
+            print('~~~~loss11')
+            samplelabels,predictions,precision=sess.run([labels,logits11,loss11])
+        elif int(step/2)==23:
+            print('~~~~loss12')
+            samplelabels,predictions,precision=sess.run([labels,logits12,loss12])
+       '''
         #print('!!!!!!the index of t/????????????????/he whole batch %f /n' % output3[0][0][0])
         """
         if step == 5:         
@@ -218,32 +198,40 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
         #print(predictions.shape)
         n_acc=0
         for i in range(0, batch_size):
-            #print('label:',int(samplelabels[i][0][0]))
-            #print('prediction:',np.argmax(predictions[i]))
+            #print('label:',samplelabels.shape)
+            #print('prediction:',predictions.shape)
             if int(samplelabels[i][0][0])==np.argmax(predictions[i]):
                 n_acc=n_acc+1
+            if int(step/2)<6:
+                l=-math.log(predictions[i][int(samplelabels[i][0][0])])
                 
+                if l<precision:
+                    simpleness[int(step/2)][int(step%2)*batch_size+i]=1
+        
         accuracies[int(step/2)]+=n_acc/(2*batch_size)
         cnts[int(step/2)]+=precision/2
         steps[int(step/2)]+=1
         step += 1
-        
+    
+      print('simpleness: ')
+      print(simpleness)
+      for i in range(0,num-1):
+          for j in range(i+1,num):
+              for n in range(0, 2*batch_size):
+                  concur_s[i][j]+=simpleness[i][n]*simpleness[j][n]+(1-simpleness[i][n])*(1-simpleness[j][n])
+              concur_s[i][j]=concur_s[i][j]/(2*batch_size)
+      print('concurrent simpleness: ')
+      print(concur_s)
+      
       i=0
       while i<2*num:
-        print('!!!!!!!!!!!!!!!!!!!! subject %s (%s records): test loss = %.3f, accuracy=%.3f' % (i%num, steps[i],cnts[i],accuracies[i]))
-        i+=1
+            print('!!!!!!!!!!!!!!!!!!!! subject %s (%s records): test loss = %.3f, accuracy=%.3f' % (i, steps[i],cnts[i],accuracies[i]))
+            i+=1
         
       print('(locally test)!!!!!!!!!!!!!!!!!!!! %s: average_test loss = %.3f, average_accuracy=%.3f' % (datetime.now(), np.mean(cnts[0:num]),np.mean(accuracies[0:num])))
       
       print('(test on 7)!!!!!!!!!!!!!!!!!!!! %s: average_test loss = %.3f, average_accuracy=%.3f' % (datetime.now(), np.mean(cnts[num:2*num]),np.mean(accuracies[num:2*num])))
     
-      for i in range(0, 24):
-            #print('label:',int(samplelabels[i][0][0]))
-            #print('prediction:',np.argmax(predictions[i]))
-            print('subject %s, loss:%.3f'% (np.argmax(cnts[num:2*num])+1,cnts[np.argmax(cnts[num:2*num])+num]))
-            cnts[np.argmax(cnts[num:2*num])+num]=-1
-            
-                
       summary = tf.Summary()
       summary.ParseFromString(sess.run(summary_op))
       summary.value.add(tag='loss @ 1', simple_value=precision)
@@ -261,79 +249,25 @@ def evaluate():
     # Get images and labels for CIFAR-10.
     eval_data = FLAGS.eval_data == 'test'
     signals, labels,indices = cnnHAR.inputs(eval_data=eval_data)
-
+    
     # Build a Graph that computes the logits predictions from the
     # inference model.
-    
-    reshape1=cnnHAR.inference_cov11(signals)
-    
-    local21=cnnHAR.inference_local21(reshape1)
-    local22=cnnHAR.inference_local22(reshape1)
-    local23=cnnHAR.inference_local23(reshape1)
-    
-    local31=cnnHAR.inference_local31(local21)
-    local32=cnnHAR.inference_local32(local21)
-    local33=cnnHAR.inference_local33(local22)
-    local34=cnnHAR.inference_local34(local22)
-    local35=cnnHAR.inference_local35(local23)
-     
-    local41=cnnHAR.inference_local41(local31)
-    local42=cnnHAR.inference_local42(local32)
-    local43=cnnHAR.inference_local43(local33)
-    local44=cnnHAR.inference_local44(local34)
-    local45=cnnHAR.inference_local45(local35)
-    local46=cnnHAR.inference_local46(local33)
-    
-    logits1=cnnHAR.inference1(local41,'_01')
-    logits2=cnnHAR.inference1(local42,'_02')
-    logits3=cnnHAR.inference1(local41,'_03')
-    logits4=cnnHAR.inference1(local42,'_04')
-    logits5=cnnHAR.inference1(local41,'_05')
-    logits6=cnnHAR.inference1(local42,'_06')
-    logits7=cnnHAR.inference1(local43,'_07')
-    logits8=cnnHAR.inference1(local43,'_08')
-    logits9=cnnHAR.inference1(local43,'_09')
-    logits10=cnnHAR.inference1(local43,'_10')
-    logits11=cnnHAR.inference1(local43,'_11')
-    logits12=cnnHAR.inference1(local43,'_12')
-    logits13=cnnHAR.inference1(local44,'_13')
-    logits14=cnnHAR.inference1(local43,'_14')
-    logits15=cnnHAR.inference1(local43,'_15')
-    logits16=cnnHAR.inference1(local43,'_16')
-    logits17=cnnHAR.inference1(local43,'_17')
-    logits18=cnnHAR.inference1(local43,'_18')
-    logits19=cnnHAR.inference1(local43,'_19')
-    logits20=cnnHAR.inference1(local45,'_20')
-    logits21=cnnHAR.inference1(local43,'_21')
-    logits22=cnnHAR.inference1(local43,'_22')
-    logits23=cnnHAR.inference1(local43,'_23')
-    logits24=cnnHAR.inference1(local46,'_24')
-    
+    logits1=cnnHAR.inference1(signals,'_01')
+    logits2=cnnHAR.inference1(signals,'_02')
+    logits3=cnnHAR.inference1(signals,'_03')
+    logits4=cnnHAR.inference1(signals,'_04')
+    logits5=cnnHAR.inference1(signals,'_05')
+    logits6=cnnHAR.inference1(signals,'_06')
+
     loss1=cnnHAR.loss(logits1, labels,'_01')
     loss2=cnnHAR.loss(logits2, labels,'_02')
     loss3=cnnHAR.loss(logits3, labels,'_03')
     loss4=cnnHAR.loss(logits4, labels,'_04')
     loss5=cnnHAR.loss(logits5, labels,'_05')
     loss6=cnnHAR.loss(logits6, labels,'_06')
-    loss7=cnnHAR.loss(logits7, labels,'_07')
-    loss8=cnnHAR.loss(logits8, labels,'_08')
-    loss9=cnnHAR.loss(logits9, labels,'_09')
-    loss10=cnnHAR.loss(logits10, labels,'_10')
-    loss11=cnnHAR.loss(logits11, labels,'_11')
-    loss12=cnnHAR.loss(logits12, labels,'_12')
-    loss13=cnnHAR.loss(logits13, labels,'_13')
-    loss14=cnnHAR.loss(logits14, labels,'_14')
-    loss15=cnnHAR.loss(logits15, labels,'_15')
-    loss16=cnnHAR.loss(logits16, labels,'_16')
-    loss17=cnnHAR.loss(logits17, labels,'_17')
-    loss18=cnnHAR.loss(logits18, labels,'_18')
-    loss19=cnnHAR.loss(logits19, labels,'_19')
-    loss20=cnnHAR.loss(logits20, labels,'_20')
-    loss21=cnnHAR.loss(logits21, labels,'_21')
-    loss22=cnnHAR.loss(logits22, labels,'_22')
-    loss23=cnnHAR.loss(logits23, labels,'_23')
-    loss24=cnnHAR.loss(logits24, labels,'_24')
-
+   
+    
+    
     # Restore the moving average version of the learned variables for eval.
     variable_averages = tf.train.ExponentialMovingAverage(
         cnnHAR.MOVING_AVERAGE_DECAY)
@@ -348,7 +282,8 @@ def evaluate():
     summary_writer = tf.summary.FileWriter(FLAGS.eval_dir, g)
 
     while True:
-      eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logits3,loss4,logits4,loss5,logits5,loss6,logits6,loss7,logits7,loss8,logits8,loss9,logits9,loss10,logits10,loss11,logits11,loss12,logits12,loss13,logits13,loss14,logits14,loss15,logits15,loss16,logits16,loss17,logits17,loss18,logits18,loss19,logits19,loss20,logits20,loss21,logits21,loss22,logits22,loss23,logits23,loss24,logits24,summary_op)
+      eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logits3,loss4,logits4,loss5,logits5,loss6,logits6,summary_op)
+      #loss7,logits7,loss8,logits8,loss9,logits9,loss10,logits10,loss11,logits11,loss12,logits12
       if FLAGS.run_once:
         break
       #time.sleep(FLAGS.eval_interval_secs)
