@@ -216,7 +216,7 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
       print('simpleness: ')
       print(simpleness)
       for i in range(0,num-1):
-          for j in range(i+1,num):
+          for j in range(0,num):
               for n in range(0, 2*batch_size):
                   concur_s[i][j]+=simpleness[i][n]*simpleness[j][n]+(1-simpleness[i][n])*(1-simpleness[j][n])
               concur_s[i][j]=concur_s[i][j]/(2*batch_size)
