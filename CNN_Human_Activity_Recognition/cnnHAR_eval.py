@@ -233,11 +233,7 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
                   grouping[i][j]=1
       print('affinity: ')
       print(grouping)
-                  
-      print('concurrent simpleness: ')
-      print(concur_s)
-      
-      
+     
       
       i=0
       while i<2*num:
