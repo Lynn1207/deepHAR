@@ -447,8 +447,8 @@ def inference_output6(local4):
     
     return softmax_linear
     
-def inference1(signals,index):
-    
+def inference1(reshape,index):
+    '''
     with tf.variable_scope('conv1'+index) as scope:
            kernel = _variable_with_weight_decay('weights',
                                                 shape=[ 20, 1, 64],
@@ -467,7 +467,7 @@ def inference1(signals,index):
     
     reshape = tf.keras.layers.Flatten()(pool1)
     reshape = tf.cast(reshape, tf.float64)
-    
+    '''
     dim = reshape.get_shape()[1]
      
     with tf.variable_scope('local2'+index) as scope:
