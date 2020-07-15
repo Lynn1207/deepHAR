@@ -204,18 +204,26 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
             if int(samplelabels[i][0][0])==np.argmax(predictions[i]):
                 n_acc=n_acc+1
             if int(step/2)<6:
-                l=-math.log(predictions[i][int(samplelabels[i][0][0])])
-                
-                if l<precision:
-                    simpleness[int(step/2)][int(step%2)*batch_size+i]=1
+                simpleness[int(step/2)][int(step%2)*batch_size+i]=-math.log(predictions[i][int(samplelabels[i][0][0])])
+        
+        print('precision:', precision)
+        print('mean:', np.mean(simpleness[int(step/2)][int(step%2)*batch_size:int(step%2)*batch_size+batch_size]))
         
         accuracies[int(step/2)]+=n_acc/(2*batch_size)
         cnts[int(step/2)]+=precision/2
         steps[int(step/2)]+=1
         step += 1
-    
+        
+      m_loss=np.mean(np.mean(cnts[0:num]))
+      for i in range(0, num):
+        for j in range(0,2*batch_size)
+          if simpleness[i][j]<m_loss:
+            simpleness[i][j]=1
+          else:
+            simpleness[i][j]=0
       print('simpleness: ')
       print(simpleness)
+      
       for i in range(0,num):
           for j in range(0,num):
               if i!=j:
