@@ -105,7 +105,7 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
       simpleness=np.zeros((num,2*batch_size))
       concur_s=np.zeros((num,num))
       grouping=np.zeros((num,num))
-      difference=np.zeros((num,num))
+      #difference=np.zeros((num,num))
       while step < num_iter and not coord.should_stop():
         #print('!!!!!!the step', step)
         #local test
@@ -223,8 +223,9 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
             simpleness[i][j]=1
           else:
             simpleness[i][j]=0
-      print('simpleness: ')
-      print(simpleness)
+      #print('simpleness: ')
+      #print(simpleness)
+      
       
       for i in range(0,num):
           for j in range(0,num):
@@ -232,12 +233,12 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
                   for n in range(0, 2*batch_size):
                       concur_s[i][j]+=simpleness[i][n]*simpleness[j][n]+(1-simpleness[i][n])*(1-simpleness[j][n])
                   concur_s[i][j]=concur_s[i][j]/(2*batch_size)
-                  difference[i][j]=1-concur_s[i][j]
+                  #difference[i][j]=1-concur_s[i][j]
       print('concurrent simpleness: ')
       print(concur_s)
       
-      print('difference:')
-      print(difference)
+      #print('difference:')
+      #print(difference)
       
       m=np.mean(concur_s)*num/(num-1)
       print(m)
@@ -279,14 +280,13 @@ def evaluate():
     # inference models
     
     reshape1=cnnHAR.inference_cov11(signals)
-    reshape2=cnnHAR.inference_cov12(signals)
     
     logits1=cnnHAR.inference1(reshape1,'_01')
-    logits2=cnnHAR.inference1(reshape2,'_02')
-    logits3=cnnHAR.inference1(reshape2,'_03')
-    logits4=cnnHAR.inference1(reshape2,'_04')
-    logits5=cnnHAR.inference1(reshape2,'_05')
-    logits6=cnnHAR.inference1(reshape2,'_06')
+    logits2=cnnHAR.inference1(reshape1,'_02')
+    logits3=cnnHAR.inference1(reshape1,'_03')
+    logits4=cnnHAR.inference1(reshape1,'_04')
+    logits5=cnnHAR.inference1(reshape1,'_05')
+    logits6=cnnHAR.inference1(reshape1,'_06')
     
     
     loss1=cnnHAR.loss(logits1, labels,'_01')
