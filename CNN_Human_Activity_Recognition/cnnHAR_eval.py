@@ -243,7 +243,7 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
       print(m)
       for i in range(0,num):
           for j in range(0,num):
-              if i!=j and concur_s[i][j]>m:
+              if i!=j and concur_s[i][j]>0.5:
                   grouping[i][j]=1
       print('affinity: ')
       print(grouping)
