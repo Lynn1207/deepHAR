@@ -102,12 +102,15 @@ def train():
     logits3=cnnHAR.inference_output3(local42)
     logits4=cnnHAR.inference_output4(local42)
     
+    logits5=logits4
+    logits6=logits3
+    
     loss1=cnnHAR.loss(logits1, labels,'_01')
     loss2=cnnHAR.loss(logits2, labels,'_02')
     loss3=cnnHAR.loss(logits3, labels,'_03')
     loss4=cnnHAR.loss(logits4, labels,'_04')
-    loss5=cnnHAR.loss(logits4, labels,'_05')
-    loss6=cnnHAR.loss(logits3, labels,'_06')
+    loss5=cnnHAR.loss(logits5, labels,'_05')
+    loss6=cnnHAR.loss(logits6, labels,'_06')
     
     train_op1 = cnnHAR.train(loss1, global_step,'_01')
     train_op2 = cnnHAR.train(loss2, global_step,'_02')
