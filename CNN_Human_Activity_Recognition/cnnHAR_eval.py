@@ -301,12 +301,15 @@ def evaluate():
     loss5=cnnHAR.loss(logits4, labels,'_05')
     loss6=cnnHAR.loss(logits3, labels,'_06')
     
+    logits5=logits4
+    logits6=logits3
+    
     loss1=cnnHAR.loss(logits1, labels,'_01')
     loss2=cnnHAR.loss(logits2, labels,'_02')
     loss3=cnnHAR.loss(logits3, labels,'_03')
     loss4=cnnHAR.loss(logits4, labels,'_04')
-    loss5=cnnHAR.loss(logits4, labels,'_05')
-    loss6=cnnHAR.loss(logits3, labels,'_06')
+    loss5=cnnHAR.loss(logits5, labels,'_05')
+    loss6=cnnHAR.loss(logits6, labels,'_06')
     
     
     # Restore the moving average version of the learned variables for eval.
