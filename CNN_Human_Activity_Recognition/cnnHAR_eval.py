@@ -206,8 +206,9 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
             if int(step/2)<6:
                 simpleness[int(step/2)][int(step%2)*batch_size+i]=-math.log(predictions[i][int(samplelabels[i][0][0])])
         
-        print('precision:', precision)
-        print('mean:', np.mean(simpleness[int(step/2)][int(step%2)*batch_size:int(step%2)*batch_size+batch_size]))
+        if int(step/2)<6:
+          print('precision:', precision)
+          print('mean:', np.mean(simpleness[int(step/2)][int(step%2)*batch_size:int(step%2)*batch_size+batch_size]))
         
         accuracies[int(step/2)]+=n_acc/(2*batch_size)
         cnts[int(step/2)]+=precision/2
