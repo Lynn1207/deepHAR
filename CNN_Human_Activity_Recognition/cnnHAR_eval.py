@@ -291,10 +291,10 @@ def evaluate():
     
     logits1=cnnHAR.inference_output1(local41)
     logits2=logits1
-    logits3=logits2
-    logits4=logits2
-    logits5=logits2
-    logits6=logits2
+    logits3=logits1
+    logits4=logits1
+    logits5=logits1
+    logits6=logits1
     
     loss1=cnnHAR.loss(logits1, labels,'_01')
     loss2=cnnHAR.loss(logits2, labels,'_02')
