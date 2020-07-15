@@ -105,6 +105,7 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
       simpleness=np.zeros((num,2*batch_size))
       concur_s=np.zeros((num,num))
       grouping=np.zeros((num,num))
+      difference=np.zeros((num,num))
       while step < num_iter and not coord.should_stop():
         #print('!!!!!!the step', step)
         #local test
@@ -231,8 +232,12 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
                   for n in range(0, 2*batch_size):
                       concur_s[i][j]+=simpleness[i][n]*simpleness[j][n]+(1-simpleness[i][n])*(1-simpleness[j][n])
                   concur_s[i][j]=concur_s[i][j]/(2*batch_size)
+                  difference[i][j]=1-concur_s[i][j]
       print('concurrent simpleness: ')
       print(concur_s)
+      
+      print('difference:')
+      print(difference)
       
       m=np.mean(concur_s)*num/(num-1)
       print(m)
@@ -271,19 +276,14 @@ def evaluate():
     signals, labels,indices = cnnHAR.inputs(eval_data=eval_data)
     
     # Build a Graph that computes the logits predictions from the
-    # inference model.
-
-
-    reshape1=cnnHAR.inference_cov11(signals)
+    # inference models
     
-    local21=cnnHAR.inference_local21(reshape1)
-    
-    logits1=cnnHAR.inference1(local21,'_01')
-    logits2=cnnHAR.inference1(local21,'_02')
-    logits3=cnnHAR.inference1(local21,'_03')
-    logits4=cnnHAR.inference1(local21,'_04')
-    logits5=cnnHAR.inference1(local21,'_05')
-    logits6=cnnHAR.inference1(local21,'_06')
+    logits1=cnnHAR.inference1(signals,'_01')
+    logits2=cnnHAR.inference1(signals,'_02')
+    logits3=cnnHAR.inference1(signals,'_03')
+    logits4=cnnHAR.inference1(signals,'_04')
+    logits5=cnnHAR.inference1(signals,'_05')
+    logits6=cnnHAR.inference1(signals,'_06')
 
     loss1=cnnHAR.loss(logits1, labels,'_01')
     loss2=cnnHAR.loss(logits2, labels,'_02')
