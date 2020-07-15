@@ -447,8 +447,8 @@ def inference_output6(local4):
     
     return softmax_linear
     
-def inference1(local3,index):
-    '''
+def inference1(signals,index):
+    
     with tf.variable_scope('conv1'+index) as scope:
            kernel = _variable_with_weight_decay('weights',
                                                 shape=[ 20, 1, 64],
@@ -489,7 +489,7 @@ def inference1(local3,index):
         local3 = tf.nn.relu(tf.matmul(local2, weights) + biases, name=scope.name)
         print ('!!!!!!!!!!!!!!!Shape of local3 :', local3.get_shape())
         _activation_summary(local3)
-    '''
+    
     with tf.variable_scope('local4'+index) as scope:
         weights = _variable_with_weight_decay('weights', shape=[512, 30], stddev=0.04, wd=None)
         biases = _variable_on_cpu('biases', [30], tf.constant_initializer(0.10))
