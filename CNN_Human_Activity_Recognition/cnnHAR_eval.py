@@ -289,13 +289,17 @@ def evaluate():
     local41=cnnHAR.inference_local41(local31)
     local42=cnnHAR.inference_local42(local32)
     
-    logits1=cnnHAR.inference1(local41,'_01')
-    logits2=cnnHAR.inference1(local42,'_02')
-    logits3=cnnHAR.inference1(local42,'_03')
-    logits4=cnnHAR.inference1(local42,'_04')
-    logits5=cnnHAR.inference1(local42,'_05')
-    logits6=cnnHAR.inference1(local42,'_06')
+    logits1=inference_output1(local41)
+    logits2=inference_output2(local42)
+    logits3=inference_output3(local42)
+    logits4=inference_output4(local42)
     
+    loss1=cnnHAR.loss(logits1, labels,'_01')
+    loss2=cnnHAR.loss(logits2, labels,'_02')
+    loss3=cnnHAR.loss(logits3, labels,'_03')
+    loss4=cnnHAR.loss(logits4, labels,'_04')
+    loss5=cnnHAR.loss(logits4, labels,'_05')
+    loss6=cnnHAR.loss(logits3, labels,'_06')
     
     loss1=cnnHAR.loss(logits1, labels,'_01')
     loss2=cnnHAR.loss(logits2, labels,'_02')
