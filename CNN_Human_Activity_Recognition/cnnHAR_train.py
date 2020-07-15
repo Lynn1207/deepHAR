@@ -88,14 +88,13 @@ def train():
     local43=cnnHAR.inference_local43(local32)
     '''
     reshape1=cnnHAR.inference_cov11(signals)
-    reshape2=cnnHAR.inference_cov12(signals)
     
     logits1=cnnHAR.inference1(reshape1,'_01')
-    logits2=cnnHAR.inference1(reshape2,'_02')
-    logits3=cnnHAR.inference1(reshape2,'_03')
-    logits4=cnnHAR.inference1(reshape2,'_04')
-    logits5=cnnHAR.inference1(reshape2,'_05')
-    logits6=cnnHAR.inference1(reshape2,'_06')
+    logits2=cnnHAR.inference1(reshape1,'_02')
+    logits3=cnnHAR.inference1(reshape1,'_03')
+    logits4=cnnHAR.inference1(reshape1,'_04')
+    logits5=cnnHAR.inference1(reshape1,'_05')
+    logits6=cnnHAR.inference1(reshape1,'_06')
     
     
     loss1=cnnHAR.loss(logits1, labels,'_01')
