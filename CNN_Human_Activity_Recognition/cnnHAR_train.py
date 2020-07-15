@@ -88,31 +88,27 @@ def train():
     local43=cnnHAR.inference_local43(local32)
     '''
     logits1=cnnHAR.inference1(signals,'_01')
-    '''
     logits2=cnnHAR.inference1(signals,'_02')
     logits3=cnnHAR.inference1(signals,'_03')
     logits4=cnnHAR.inference1(signals,'_04')
     logits5=cnnHAR.inference1(signals,'_05')
     logits6=cnnHAR.inference1(signals,'_06')
-    '''
+    
     
     loss1=cnnHAR.loss(logits1, labels,'_01')
-    '''
     loss2=cnnHAR.loss(logits2, labels,'_02')
     loss3=cnnHAR.loss(logits3, labels,'_03')
     loss4=cnnHAR.loss(logits4, labels,'_04')
     loss5=cnnHAR.loss(logits5, labels,'_05')
     loss6=cnnHAR.loss(logits6, labels,'_06')
-    '''
     
     train_op1 = cnnHAR.train(loss1, global_step,'_01')
-    '''
     train_op2 = cnnHAR.train(loss2, global_step,'_02')
     train_op3 = cnnHAR.train(loss3, global_step,'_03')
     train_op4 = cnnHAR.train(loss4, global_step,'_04')
     train_op5 = cnnHAR.train(loss5, global_step,'_05')
     train_op6 = cnnHAR.train(loss6, global_step,'_06')
-    '''
+ 
 
     extra_update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
     class _LoggerHook(tf.train.SessionRunHook):
@@ -207,9 +203,9 @@ def train():
       i=0
       while not mon_sess.should_stop():
 #        mon_sess = tfdbg.LocalCLIDebugWrapperSession(mon_sess)
-        mon_sess.run([train_op1,extra_update_ops])
+        #mon_sess.run([train_op1,extra_update_ops])
         #print('~~~~~~~~~~~~~~~~%d step:'%i)
-        '''
+        
         index=int(i%(num*7)/7)
         if index==0:
             #print('~~~~~~~~~~~~~~~~train_op1')
@@ -229,7 +225,7 @@ def train():
         elif index==5:
             #print('~~~~~~~~~~~~~~~~train_op6')
             mon_sess.run([train_op6,extra_update_ops])
-        
+        '''
         elif index==6:
             #print('~~~~~~~~~~~~~~~~train_op1')
             mon_sess.run([train_op7,extra_update_ops])
@@ -248,9 +244,9 @@ def train():
         elif index==11:
             #print('~~~~~~~~~~~~~~~~train_op6')
             mon_sess.run([train_op12,extra_update_ops])
-        
-        i=i+1
         '''
+        i=i+1
+        
         #print('~~~~~~~~~~~~~~~~one session ends~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
 
 def main(argv=None):  # pylint: disable=unused-argument
