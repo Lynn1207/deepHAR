@@ -281,12 +281,16 @@ def evaluate():
     
     reshape1=cnnHAR.inference_cov11(signals)
     
-    logits1=cnnHAR.inference1(reshape1,'_01')
-    logits2=cnnHAR.inference1(reshape1,'_02')
-    logits3=cnnHAR.inference1(reshape1,'_03')
-    logits4=cnnHAR.inference1(reshape1,'_04')
-    logits5=cnnHAR.inference1(reshape1,'_05')
-    logits6=cnnHAR.inference1(reshape1,'_06')
+    local21=cnnHAR.inference_local21(reshape1)
+    local22=cnnHAR.inference_local22(reshape1)
+    local23=cnnHAR.inference_local23(reshape1)
+    
+    logits1=cnnHAR.inference1(local21,'_01')
+    logits2=cnnHAR.inference1(local21,'_02')
+    logits3=cnnHAR.inference1(local21,'_03')
+    logits4=cnnHAR.inference1(local21,'_04')
+    logits5=cnnHAR.inference1(local22,'_05')
+    logits6=cnnHAR.inference1(local23,'_06')
     
     loss1=cnnHAR.loss(logits1, labels,'_01')
     loss2=cnnHAR.loss(logits2, labels,'_02')
