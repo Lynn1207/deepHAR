@@ -344,7 +344,7 @@ def inference_local41(local3):
     return local4
     
 def inference_local42(local3):
-    with tf.variable_scope('local4_03') as scope:
+    with tf.variable_scope('local4_03_04_05_06') as scope:
         weights = _variable_with_weight_decay('weights', shape=[512, 30], stddev=0.04, wd=None)
         biases = _variable_on_cpu('biases', [30], tf.constant_initializer(0.10))
             
