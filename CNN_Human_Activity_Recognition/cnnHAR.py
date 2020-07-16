@@ -155,7 +155,7 @@ def _add_loss_summaries(total_loss,index):
 
     
 def inference_cov11(signals):
-    with tf.variable_scope('conv1_01_02_05_06') as scope:
+    with tf.variable_scope('conv1_01_02_03_04_05_06') as scope:
            kernel = _variable_with_weight_decay('weights',
                                                 shape=[ 20, 1, 64],
                                                 #shape=[3, 1, 128],
@@ -169,7 +169,7 @@ def inference_cov11(signals):
            print ('<<<<<<<<<<<<<<<<<<<<Shape of conv1 :',conv1.get_shape())
            
          # pool1
-    pool1 = tf.nn.max_pool1d(conv1, ksize=[1,3,1], strides=[1,3,1],padding='VALID',name='pool1_01_02_05_06')
+    pool1 = tf.nn.max_pool1d(conv1, ksize=[1,3,1], strides=[1,3,1],padding='VALID',name='pool1_01_02_03_04_05_06')
      
     reshape = tf.keras.layers.Flatten()(pool1)
     reshape = tf.cast(reshape, tf.float64)
@@ -447,8 +447,8 @@ def inference_output6(local4):
     
     return softmax_linear
     
-def inference1(signals,index):
-    
+def inference1(reshape,index):
+    '''
     with tf.variable_scope('conv1'+index) as scope:
            kernel = _variable_with_weight_decay('weights',
                                                 shape=[ 20, 1, 64],
@@ -467,7 +467,7 @@ def inference1(signals,index):
     
     reshape = tf.keras.layers.Flatten()(pool1)
     reshape = tf.cast(reshape, tf.float64)
-    
+    '''
     dim = reshape.get_shape()[1]
      
     with tf.variable_scope('local2'+index) as scope:
