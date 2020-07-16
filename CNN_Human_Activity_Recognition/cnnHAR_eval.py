@@ -282,10 +282,6 @@ def evaluate():
     reshape2=cnnHAR.inference_cov12(signals)
     reshape3=cnnHAR.inference_cov13(signals)
     
-    reshape1=cnnHAR.inference_cov11(signals)
-    reshape2=cnnHAR.inference_cov12(signals)
-    reshape3=cnnHAR.inference_cov13(signals)
-    
     local21=cnnHAR.inference_local21(reshape1)
     local22=cnnHAR.inference_local22(reshape2)
     local23=cnnHAR.inference_local23(reshape3)
