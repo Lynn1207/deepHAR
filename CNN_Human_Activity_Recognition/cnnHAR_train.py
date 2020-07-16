@@ -109,7 +109,7 @@ def train():
     logits1=cnnHAR.inference_output1(local41)
     logits2=logits1
     logits3=cnnHAR.inference_output2(local42)
-    logits4=cnnHAR.inference_output3(local42)
+    logits4=logits3
     logits5=logits3
     logits6=logits3
     
