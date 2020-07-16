@@ -43,7 +43,7 @@ import tensorflow.compat.v1 as tf
 
 import cnnHAR
 
-num=6 #number of nodes
+num=12 #number of nodes
 
 FLAGS = tf.app.flags.FLAGS
 
@@ -127,26 +127,25 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
         elif int(step/2)==5:
             #print('~~~~loss6')
             samplelabels,predictions,precision=sess.run([labels,logits6,loss6])
-        '''
         elif int(step/2)==6:
-            print('~~~~loss7')
+            #print('~~~~loss7')
             samplelabels,predictions,precision=sess.run([labels,logits7,loss7])
         elif int(step/2)==7:
-            print('~~~~loss8')
+            #print('~~~~loss8')
             samplelabels,predictions,precision=sess.run([labels,logits8,loss8])
         elif int(step/2)==8:
-            print('~~~~loss9')
+            #print('~~~~loss9')
             samplelabels,predictions,precision=sess.run([labels,logits9,loss9])
         elif int(step/2)==9:
-            print('~~~~loss10')
+            #print('~~~~loss10')
             samplelabels,predictions,precision=sess.run([labels,logits10,loss10])
         elif int(step/2)==10:
-            print('~~~~loss11')
+            #print('~~~~loss11')
             samplelabels,predictions,precision=sess.run([labels,logits11,loss11])
         elif int(step/2)==11:
-            print('~~~~loss12')
+            #print('~~~~loss12')
             samplelabels,predictions,precision=sess.run([labels,logits12,loss12])
-        '''
+        
         #test on 7
         if int(step/2)==6:
             #print('~~~~loss1')
@@ -165,27 +164,26 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
             samplelabels,predictions,precision=sess.run([labels,logits5,loss5])
         elif int(step/2)==11:
             #print('~~~~loss6')
-            samplelabels,predictions,precision=sess.run([labels,logits6,loss6])
-        '''
+            samplelabels,predictions,precision=sess.run([labels,logits6,loss6])  
         elif int(step/2)==12:
-            print('~~~~loss7')
+            #print('~~~~loss7')
             samplelabels,predictions,precision=sess.run([labels,logits7,loss7])
         elif int(step/2)==19:
-            print('~~~~loss8')
+            #print('~~~~loss8')
             samplelabels,predictions,precision=sess.run([labels,logits8,loss8])
         elif int(step/2)==20:
-            print('~~~~loss9')
+            #print('~~~~loss9')
             samplelabels,predictions,precision=sess.run([labels,logits9,loss9])
         elif int(step/2)==21:
-            print('~~~~loss10')
+            #print('~~~~loss10')
             samplelabels,predictions,precision=sess.run([labels,logits10,loss10])
         elif int(step/2)==22:
-            print('~~~~loss11')
+            #print('~~~~loss11')
             samplelabels,predictions,precision=sess.run([labels,logits11,loss11])
         elif int(step/2)==23:
-            print('~~~~loss12')
+            #print('~~~~loss12')
             samplelabels,predictions,precision=sess.run([labels,logits12,loss12])
-       '''
+       
         #print('!!!!!!the index of t/????????????????/he whole batch %f /n' % output3[0][0][0])
         """
         if step == 5:         
@@ -277,28 +275,19 @@ def evaluate():
     signals, labels,indices = cnnHAR.inputs(eval_data=eval_data)
     
     # Build a Graph that computes the logits predictions from the
-    # inference models
-    
-    reshape1=cnnHAR.inference_cov11(signals)
-    
-    local21=cnnHAR.inference_local21(reshape1)
-    local22=cnnHAR.inference_local22(reshape1)
-    local23=cnnHAR.inference_local23(reshape1)
-    
-    local31=cnnHAR.inference_local31(local21)
-    local32=cnnHAR.inference_local32(local22)
-    local33=cnnHAR.inference_local33(local23)
-    
-    local41=cnnHAR.inference_local41(local31)
-    local42=cnnHAR.inference_local42(local32)
-    local43=cnnHAR.inference_local43(local33)
-    
-    logits1=cnnHAR.inference1(local41,'_01')
-    logits2=cnnHAR.inference1(local41,'_02')
-    logits3=cnnHAR.inference1(local41,'_03')
-    logits4=cnnHAR.inference1(local41,'_04')
-    logits5=cnnHAR.inference1(local42,'_05')
-    logits6=cnnHAR.inference1(local43,'_06')
+    # inference model
+    logits1=cnnHAR.inference1(signals,'_01')
+    logits2=cnnHAR.inference1(signals,'_02')
+    logits3=cnnHAR.inference1(signals,'_03')
+    logits4=cnnHAR.inference1(signals,'_04')
+    logits5=cnnHAR.inference1(signals,'_05')
+    logits6=cnnHAR.inference1(signals,'_06')
+    logits7=cnnHAR.inference1(signals,'_07')
+    logits8=cnnHAR.inference1(signals,'_08')
+    logits9=cnnHAR.inference1(signals,'_09')
+    logits10=cnnHAR.inference1(signals,'_10')
+    logits11=cnnHAR.inference1(signals,'_11')
+    logits12=cnnHAR.inference1(signals,'_12')
     
     loss1=cnnHAR.loss(logits1, labels,'_01')
     loss2=cnnHAR.loss(logits2, labels,'_02')
@@ -306,7 +295,12 @@ def evaluate():
     loss4=cnnHAR.loss(logits4, labels,'_04')
     loss5=cnnHAR.loss(logits5, labels,'_05')
     loss6=cnnHAR.loss(logits6, labels,'_06')
-    
+    loss7=cnnHAR.loss(logits7, labels,'_07')
+    loss8=cnnHAR.loss(logits8, labels,'_08')
+    loss9=cnnHAR.loss(logits9, labels,'_09')
+    loss10=cnnHAR.loss(logits10, labels,'_10')
+    loss11=cnnHAR.loss(logits11, labels,'_11')
+    loss12=cnnHAR.loss(logits12, labels,'_12')
     
     # Restore the moving average version of the learned variables for eval.
     variable_averages = tf.train.ExponentialMovingAverage(
