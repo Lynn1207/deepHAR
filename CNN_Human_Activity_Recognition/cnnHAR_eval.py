@@ -63,7 +63,7 @@ tf.app.flags.DEFINE_boolean('run_once', True,
 batch_size = 32
 NUM_CLASSES = cnnHAR.NUM_CLASSES
 
-def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logits3,loss4,logits4,loss5,logits5,loss6,logits6,summary_op):#loss2,logits2,loss3,logits3,loss4,logits4,loss5,logits5,loss6,logits6,
+def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logits3,loss4,logits4,loss5,logits5,loss6,logits6,loss7,logits7,loss8,logits8,loss9,logits9,loss10,logits10,loss11,logits11,loss12,logits12,summary_op):
   
   """Run Eval once.
 
@@ -316,7 +316,7 @@ def evaluate():
     summary_writer = tf.summary.FileWriter(FLAGS.eval_dir, g)
 
     while True:
-      eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logits3,loss4,logits4,loss5,logits5,loss6,logits6,summary_op)
+      eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logits3,loss4,logits4,loss5,logits5,loss6,logits6,loss7,logits7,loss8,logits8,loss9,logits9,loss10,logits10,loss11,logits11,loss12,logits12,summary_op)
       #loss7,logits7,loss8,logits8,loss9,logits9,loss10,logits10,loss11,logits11,loss12,logits12
       if FLAGS.run_once:
         break
