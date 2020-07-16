@@ -147,25 +147,25 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
             samplelabels,predictions,precision=sess.run([labels,logits12,loss12])
         
         #test on 7
-        if int(step/2)==6:
+        if int(step/2)==12:
             #print('~~~~loss1')
             samplelabels,predictions,precision=sess.run([labels,logits1,loss1])
-        elif int(step/2)==7:
+        elif int(step/2)==13:
             #print('~~~~loss2')
             samplelabels,predictions,precision=sess.run([labels,logits2,loss2])
-        elif int(step/2)==8:
+        elif int(step/2)==14:
             #print('~~~~loss3')
             samplelabels,predictions,precision=sess.run([labels,logits3,loss3])
-        elif int(step/2)==9:
+        elif int(step/2)==15:
             #print('~~~~loss4')
             samplelabels,predictions,precision=sess.run([labels,logits4,loss4])
-        elif int(step/2)==10:
+        elif int(step/2)==16:
             #print('~~~~loss5')
             samplelabels,predictions,precision=sess.run([labels,logits5,loss5])
-        elif int(step/2)==11:
+        elif int(step/2)==17:
             #print('~~~~loss6')
             samplelabels,predictions,precision=sess.run([labels,logits6,loss6])  
-        elif int(step/2)==12:
+        elif int(step/2)==18:
             #print('~~~~loss7')
             samplelabels,predictions,precision=sess.run([labels,logits7,loss7])
         elif int(step/2)==19:
