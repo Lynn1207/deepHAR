@@ -240,11 +240,11 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
       #print('difference:')
       #print(difference)
       
-      m=round(np.mean(concur_s)*num/(num-1),2)
+      m=np.mean(concur_s)*num/(num-1)
       print(m)
       for i in range(0,num):
           for j in range(0,num):
-              if i!=j and round(concur_s[i][j],2)>=m:
+              if i!=j and concur_s[i][j]>=m:
                   grouping[i][j]=1
       print('affinity: ')
       print(grouping)
@@ -279,24 +279,12 @@ def evaluate():
     # Build a Graph that computes the logits predictions from the
     # inference models
     
-    reshape1=cnnHAR.inference_cov11(signals)
-    reshape2=cnnHAR.inference_cov12(signals)
-    
-    local21=cnnHAR.inference_local21(reshape1)
-    local22=cnnHAR.inference_local22(reshape2)
-    
-    local31=cnnHAR.inference_local31(local21)
-    local32=cnnHAR.inference_local32(local22)
-    
-    local41=cnnHAR.inference_local41(local31)
-    local42=cnnHAR.inference_local42(local32)
-    
-    logits1=cnnHAR.inference_output1(local41)
-    logits2=logits1
-    logits3=cnnHAR.inference_output2(local42)
-    logits4=logits3
-    logits5=logits3
-    logits6=logits3
+    logits1=cnnHAR.inference1(signals,'_01')
+    logits2=cnnHAR.inference1(signals,'_02')
+    logits3=cnnHAR.inference1(signals,'_03')
+    logits4=cnnHAR.inference1(signals,'_04')
+    logits5=cnnHAR.inference1(signals,'_05')
+    logits6=cnnHAR.inference1(signals,'_06')
     
     loss1=cnnHAR.loss(logits1, labels,'_01')
     loss2=cnnHAR.loss(logits2, labels,'_02')
