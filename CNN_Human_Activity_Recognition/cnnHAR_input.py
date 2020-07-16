@@ -133,7 +133,7 @@ def distorted_inputs(data_dir, batch_size):
     images: Images. 4D tensor of [batch_size, IMAGE_SIZE, IMAGE_SIZE, 3] size.
     labels: Labels. 1D tensor of [batch_size] size.
   """
-  filename = [os.path.join(data_dir, '2530_train.csv')]
+  filename = [os.path.join(data_dir, '0112_train.csv')]
   #if not tf.io.gfile.exists(filename):
     #raise ValueError('Failed to find file: ' + filename)
 
@@ -164,10 +164,10 @@ def distorted_inputs(data_dir, batch_size):
 def inputs(eval_data, data_dir, batch_size):
 
   if not eval_data:
-    filenames = [os.path.join(data_dir, '2530_train.csv')]
+    filenames = [os.path.join(data_dir, '0112_train.csv')]
     num_examples_per_epoch = NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN
   else:
-    filenames = [os.path.join(data_dir, '2530_test.csv')]
+    filenames = [os.path.join(data_dir, '0112_test.csv')]
     num_examples_per_epoch = NUM_EXAMPLES_PER_EPOCH_FOR_EVAL
 
   #if not tf.io.gfile.exists(filenames):
