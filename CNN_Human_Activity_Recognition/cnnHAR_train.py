@@ -114,6 +114,12 @@ def train():
     logits4=logits1
     logits5=logits1
     logits6=logits1
+    logits7=logits1
+    logits8=logits1
+    logits9=logits1
+    logits10=logits1
+    logits11=logits1
+    logits12=logits1
     
     loss1=cnnHAR.loss(logits1, labels,'_01')
     loss2=cnnHAR.loss(logits2, labels,'_02')
