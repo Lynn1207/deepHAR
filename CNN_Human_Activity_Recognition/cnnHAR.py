@@ -155,7 +155,7 @@ def _add_loss_summaries(total_loss,index):
 
     
 def inference_cov11(signals):
-    with tf.variable_scope('conv1_01_02_03_04_05_06_07_08_09_10_11_12') as scope:
+    with tf.variable_scope('conv1_01_02_03_04_05_06') as scope:
            kernel = _variable_with_weight_decay('weights',
                                                 shape=[ 20, 1, 64],
                                                 #shape=[3, 1, 128],
@@ -447,7 +447,7 @@ def inference_output6(local4):
     
     return softmax_linear
     
-def inference1(local4,index):
+def inference1(local2,index):
     '''
     with tf.variable_scope('conv1'+index) as scope:
            kernel = _variable_with_weight_decay('weights',
@@ -467,7 +467,7 @@ def inference1(local4,index):
     
     reshape = tf.keras.layers.Flatten()(pool1)
     reshape = tf.cast(reshape, tf.float64)
-    
+    '''
     dim = reshape.get_shape()[1]
      
     with tf.variable_scope('local2'+index) as scope:
@@ -497,7 +497,7 @@ def inference1(local4,index):
         local4 = tf.nn.relu(tf.matmul(local3, weights) + biases, name=scope.name)
         print ('!!!!!!!!!!!!!!!Shape of local4 :', local4.get_shape())#256
         _activation_summary(local4)
-    '''
+    
     with tf.variable_scope('softmax_linear'+index) as scope:
           weights = _variable_with_weight_decay('weights', [30, NUM_CLASSES],stddev=1/30.0, wd=None)
           biases = _variable_on_cpu('biases', [NUM_CLASSES],tf.constant_initializer(0.0))
