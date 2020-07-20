@@ -447,7 +447,7 @@ def inference_output6(local4):
     
     return softmax_linear
     
-def inference1(local2,index):
+def inference1(reshape,index):
     '''
     with tf.variable_scope('conv1'+index) as scope:
            kernel = _variable_with_weight_decay('weights',
