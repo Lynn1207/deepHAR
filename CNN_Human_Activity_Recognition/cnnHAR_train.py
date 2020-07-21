@@ -49,7 +49,7 @@ import cnnHAR_eval
 
 train_dir = '/home/ubuntu/deepHAR/CNN_Human_Activity_Recognition/cnnHAR_check'
 
-num=12 # number of nodes
+num=24 # number of nodes
 
 max_steps = num*7*4*110+1
 
@@ -90,21 +90,30 @@ def train():
     local42=cnnHAR.inference_local42(local32)
     local43=cnnHAR.inference_local43(local33)
     '''
-    reshape1=cnnHAR.inference_cov11(signals)
-    reshape2=cnnHAR.inference_cov12(signals)
-    
-    logits1=cnnHAR.inference1(reshape1,'_01')
-    logits2=cnnHAR.inference1(reshape1,'_02')
-    logits3=cnnHAR.inference1(reshape1,'_03')
-    logits4=cnnHAR.inference1(reshape1,'_04')
-    logits5=cnnHAR.inference1(reshape1,'_05')
-    logits6=cnnHAR.inference1(reshape1,'_06')
-    logits7=cnnHAR.inference1(reshape2,'_07')
-    logits8=cnnHAR.inference1(reshape2,'_08')
-    logits9=cnnHAR.inference1(reshape2,'_09')
-    logits10=cnnHAR.inference1(reshape2,'_10')
-    logits11=cnnHAR.inference1(reshape2,'_11')
-    logits12=cnnHAR.inference1(reshape2,'_12')
+    logits1=cnnHAR.inference1(signals,'_01')
+    logits2=cnnHAR.inference1(signals,'_02')
+    logits3=cnnHAR.inference1(signals,'_03')
+    logits4=cnnHAR.inference1(signals,'_04')
+    logits5=cnnHAR.inference1(signals,'_05')
+    logits6=cnnHAR.inference1(signals,'_06')
+    logits7=cnnHAR.inference1(signals,'_07')
+    logits8=cnnHAR.inference1(signals,'_08')
+    logits9=cnnHAR.inference1(signals,'_09')
+    logits10=cnnHAR.inference1(signals,'_10')
+    logits11=cnnHAR.inference1(signals,'_11')
+    logits12=cnnHAR.inference1(signals,'_12')
+    logits13=cnnHAR.inference1(signals,'_13')
+    logits14=cnnHAR.inference1(signals,'_14')
+    logits15=cnnHAR.inference1(signals,'_15')
+    logits16=cnnHAR.inference1(signals,'_16')
+    logits17=cnnHAR.inference1(signals,'_17')
+    logits18=cnnHAR.inference1(signals,'_18')
+    logits19=cnnHAR.inference1(signals,'_19')
+    logits20=cnnHAR.inference1(signals,'_20')
+    logits21=cnnHAR.inference1(signals,'_21')
+    logits22=cnnHAR.inference1(signals,'_22')
+    logits23=cnnHAR.inference1(signals,'_23')
+    logits24=cnnHAR.inference1(signals,'_24')
     '''
     logits1=cnnHAR.inference_output1(local41)
     logits2=logits1
@@ -131,6 +140,18 @@ def train():
     loss10=cnnHAR.loss(logits10, labels,'_10')
     loss11=cnnHAR.loss(logits11, labels,'_11')
     loss12=cnnHAR.loss(logits12, labels,'_12')
+    loss13=cnnHAR.loss(logits13, labels,'_13')
+    loss14=cnnHAR.loss(logits14, labels,'_14')
+    loss15=cnnHAR.loss(logits15, labels,'_15')
+    loss16=cnnHAR.loss(logits16, labels,'_16')
+    loss17=cnnHAR.loss(logits17, labels,'_17')
+    loss18=cnnHAR.loss(logits18, labels,'_18')
+    loss19=cnnHAR.loss(logits19, labels,'_19')
+    loss20=cnnHAR.loss(logits20, labels,'_20')
+    loss21=cnnHAR.loss(logits21, labels,'_21')
+    loss22=cnnHAR.loss(logits22, labels,'_22')
+    loss23=cnnHAR.loss(logits23, labels,'_23')
+    loss24=cnnHAR.loss(logits24, labels,'_24')
     
     train_op1 = cnnHAR.train(loss1, global_step,'_01')
     train_op2 = cnnHAR.train(loss2, global_step,'_02')
