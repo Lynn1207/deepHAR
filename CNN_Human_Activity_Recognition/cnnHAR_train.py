@@ -90,6 +90,7 @@ def train():
     local42=cnnHAR.inference_local42(local32)
     local43=cnnHAR.inference_local43(local33)
     '''
+    '''
     logits1=cnnHAR.inference1(signals,'_01')
     logits2=cnnHAR.inference1(signals,'_02')
     logits3=cnnHAR.inference1(signals,'_03')
@@ -114,7 +115,13 @@ def train():
     logits22=cnnHAR.inference1(signals,'_22')
     logits23=cnnHAR.inference1(signals,'_23')
     logits24=cnnHAR.inference1(signals,'_24')
+    
     '''
+    reshape1=cnnHAR.inference_cov11(signals)
+    local21=cnnHAR.inference_local21(reshape1)
+    local31=cnnHAR.inference_local31(local21)
+    local41=cnnHAR.inference_local31(local31)
+    
     logits1=cnnHAR.inference_output1(local41)
     logits2=logits1
     logits3=logits1
@@ -127,7 +134,19 @@ def train():
     logits10=logits1
     logits11=logits1
     logits12=logits1
-    '''
+    logits13=logits1
+    logits14=logits1
+    logits15=logits1
+    logits16=logits1
+    logits17=logits1
+    logits18=logits1
+    logits19=logits1
+    logits20=logits1
+    logits21=logits1
+    logits22=logits1
+    logits23=logits1
+    logits24=logits1
+    
     loss1=cnnHAR.loss(logits1, labels,'_01')
     loss2=cnnHAR.loss(logits2, labels,'_02')
     loss3=cnnHAR.loss(logits3, labels,'_03')
