@@ -31,7 +31,7 @@ import tensorflow.compat.v1 as tf
 # architecture will change and any model would need to be retrained.
 SIGNAL_SIZE = 128
 channels = 1
-num=12
+num=24
 
 
 # Global constants describing the CIFAR-10 data set.
