@@ -302,7 +302,7 @@ def evaluate():
     reshape1=cnnHAR.inference_cov11(signals)
     local21=cnnHAR.inference_local21(reshape1)
     local31=cnnHAR.inference_local31(local21)
-    local41=cnnHAR.inference_local31(local31)
+    local41=cnnHAR.inference_local41(local31)
     
     logits1=cnnHAR.inference_output1(local41)
     logits2=logits1
