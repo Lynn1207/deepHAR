@@ -299,35 +299,34 @@ def evaluate():
     
     # Build a Graph that computes the logits predictions from the
     # inference model
-    reshape1=cnnHAR.inference_cov11(signals)
-    local21=cnnHAR.inference_local21(reshape1)
-    local31=cnnHAR.inference_local31(local21)
-    local41=cnnHAR.inference_local41(local31)
     
-    logits1=cnnHAR.inference_output1(local41)
-    logits2=logits1
-    logits3=logits1
-    logits4=logits1
-    logits5=logits1
-    logits6=logits1
-    logits7=logits1
-    logits8=logits1
-    logits9=logits1
-    logits10=logits1
-    logits11=logits1
-    logits12=logits1
-    logits13=logits1
-    logits14=logits1
-    logits15=logits1
-    logits16=logits1
-    logits17=logits1
-    logits18=logits1
-    logits19=logits1
-    logits20=logits1
-    logits21=logits1
-    logits22=logits1
-    logits23=logits1
-    logits24=logits1
+    reshape1=cnnHAR.inference_cov11(signals)
+    reshape2=cnnHAR.inference_cov12(signals)
+    
+    logits1=cnnHAR.inference1(reshape1,'_01')
+    logits2=cnnHAR.inference1(reshape1,'_02')
+    logits3=cnnHAR.inference1(reshape1,'_03')
+    logits4=cnnHAR.inference1(reshape1,'_04')
+    logits5=cnnHAR.inference1(reshape1,'_05')
+    logits6=cnnHAR.inference1(reshape1,'_06')
+    logits7=cnnHAR.inference1(reshape2,'_07')
+    logits8=cnnHAR.inference1(reshape2,'_08')
+    logits9=cnnHAR.inference1(reshape2,'_09')
+    logits10=cnnHAR.inference1(reshape2,'_10')
+    logits11=cnnHAR.inference1(reshape2,'_11')
+    logits12=cnnHAR.inference1(reshape2,'_12')
+    logits13=cnnHAR.inference1(reshape2,'_13')
+    logits14=cnnHAR.inference1(reshape2,'_14')
+    logits15=cnnHAR.inference1(reshape2,'_15')
+    logits16=cnnHAR.inference1(reshape2,'_16')
+    logits17=cnnHAR.inference1(reshape2,'_17')
+    logits18=cnnHAR.inference1(reshape2,'_18')
+    logits19=cnnHAR.inference1(reshape2,'_19')
+    logits20=cnnHAR.inference1(reshape2,'_20')
+    logits21=cnnHAR.inference1(reshape2,'_21')
+    logits22=cnnHAR.inference1(reshape2,'_22')
+    logits23=cnnHAR.inference1(reshape2,'_23')
+    logits24=cnnHAR.inference1(reshape2,'_24')
     
     loss1=cnnHAR.loss(logits1, labels,'_01')
     loss2=cnnHAR.loss(logits2, labels,'_02')
