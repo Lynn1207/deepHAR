@@ -90,7 +90,7 @@ def train():
     local42=cnnHAR.inference_local42(local32)
     local43=cnnHAR.inference_local43(local33)
     '''
-    
+    '''
     logits1=cnnHAR.inference1(signals,'_01')
     logits2=cnnHAR.inference1(signals,'_02')
     logits3=cnnHAR.inference1(signals,'_03')
@@ -146,7 +146,7 @@ def train():
     logits22=logits1
     logits23=logits1
     logits24=logits1
-    '''
+    
     loss1=cnnHAR.loss(logits1, labels,'_01')
     loss2=cnnHAR.loss(logits2, labels,'_02')
     loss3=cnnHAR.loss(logits3, labels,'_03')
