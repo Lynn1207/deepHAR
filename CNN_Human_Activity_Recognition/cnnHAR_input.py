@@ -31,11 +31,11 @@ import tensorflow.compat.v1 as tf
 # architecture will change and any model would need to be retrained.
 SIGNAL_SIZE = 128
 channels = 1
-num=24
+num=6
 
 
 # Global constants describing the CIFAR-10 data set.
-NUM_CLASSES = 6
+NUM_CLASSES = 2
 NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = 32*num
 NUM_EXAMPLES_PER_EPOCH_FOR_EVAL = 128*num/6
 
@@ -133,7 +133,7 @@ def distorted_inputs(data_dir, batch_size):
     images: Images. 4D tensor of [batch_size, IMAGE_SIZE, IMAGE_SIZE, 3] size.
     labels: Labels. 1D tensor of [batch_size] size.
   """
-  filename = [os.path.join(data_dir, '0124_train.csv')]
+  filename = [os.path.join(data_dir, '2530_train.csv')]
   #if not tf.io.gfile.exists(filename):
     #raise ValueError('Failed to find file: ' + filename)
 
@@ -164,10 +164,10 @@ def distorted_inputs(data_dir, batch_size):
 def inputs(eval_data, data_dir, batch_size):
 
   if not eval_data:
-    filenames = [os.path.join(data_dir, '0124_train.csv')]
+    filenames = [os.path.join(data_dir, '2530_train.csv')]
     num_examples_per_epoch = NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN
   else:
-    filenames = [os.path.join(data_dir, '0124_test.csv')]
+    filenames = [os.path.join(data_dir, '2530_test.csv')]
     num_examples_per_epoch = NUM_EXAMPLES_PER_EPOCH_FOR_EVAL
 
   #if not tf.io.gfile.exists(filenames):
