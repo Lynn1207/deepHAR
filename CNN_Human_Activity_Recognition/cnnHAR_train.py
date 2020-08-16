@@ -49,7 +49,7 @@ import cnnHAR_eval
 
 train_dir = '/home/ubuntu/deepHAR/CNN_Human_Activity_Recognition/cnnHAR_check'
 
-num=24 # number of nodes
+num=6 # number of nodes
 
 max_steps = num*7*4*110+1
 
@@ -90,34 +90,13 @@ def train():
     local42=cnnHAR.inference_local42(local32)
     local43=cnnHAR.inference_local43(local33)
     '''
-    reshape1=cnnHAR.inference_cov11(signals)
-    reshape2=cnnHAR.inference_cov12(signals)
+    logits1=cnnHAR.inference1(signals,'_01')
+    logits2=cnnHAR.inference1(signals,'_02')
+    logits3=cnnHAR.inference1(signals,'_03')
+    logits4=cnnHAR.inference1(signals,'_04')
+    logits5=cnnHAR.inference1(signals,'_05')
+    logits6=cnnHAR.inference1(signals,'_06')
     
-    logits1=cnnHAR.inference1(local21,'_01')
-    logits2=cnnHAR.inference1(local21,'_02')
-    logits3=cnnHAR.inference1(local21,'_03')
-    logits4=cnnHAR.inference1(local21,'_04')
-    logits5=cnnHAR.inference1(local21,'_05')
-    logits6=cnnHAR.inference1(local21,'_06')
-    logits7=cnnHAR.inference1(local22,'_07')
-    logits8=cnnHAR.inference1(local22,'_08')
-    logits9=cnnHAR.inference1(local22,'_09')
-    logits10=cnnHAR.inference1(local22,'_10')
-    logits11=cnnHAR.inference1(local22,'_11')
-    logits12=cnnHAR.inference1(local22,'_12')
-    logits13=cnnHAR.inference1(local22,'_13')
-    logits14=cnnHAR.inference1(local22,'_14')
-    logits15=cnnHAR.inference1(local22,'_15')
-    logits16=cnnHAR.inference1(local22,'_16')
-    logits17=cnnHAR.inference1(local22,'_17')
-    logits18=cnnHAR.inference1(local22,'_18')
-    logits19=cnnHAR.inference1(local22,'_19')
-    logits20=cnnHAR.inference1(local22,'_20')
-    logits21=cnnHAR.inference1(local22,'_21')
-    logits22=cnnHAR.inference1(local22,'_22')
-    logits23=cnnHAR.inference1(local22,'_23')
-    logits24=cnnHAR.inference1(local22,'_24')
-   
     '''
     reshape1=cnnHAR.inference_cov11(signals)
     local21=cnnHAR.inference_local21(reshape1)
@@ -155,49 +134,13 @@ def train():
     loss4=cnnHAR.loss(logits4, labels,'_04')
     loss5=cnnHAR.loss(logits5, labels,'_05')
     loss6=cnnHAR.loss(logits6, labels,'_06')
-    loss7=cnnHAR.loss(logits7, labels,'_07')
-    loss8=cnnHAR.loss(logits8, labels,'_08')
-    loss9=cnnHAR.loss(logits9, labels,'_09')
-    loss10=cnnHAR.loss(logits10, labels,'_10')
-    loss11=cnnHAR.loss(logits11, labels,'_11')
-    loss12=cnnHAR.loss(logits12, labels,'_12')
-    loss13=cnnHAR.loss(logits13, labels,'_13')
-    loss14=cnnHAR.loss(logits14, labels,'_14')
-    loss15=cnnHAR.loss(logits15, labels,'_15')
-    loss16=cnnHAR.loss(logits16, labels,'_16')
-    loss17=cnnHAR.loss(logits17, labels,'_17')
-    loss18=cnnHAR.loss(logits18, labels,'_18')
-    loss19=cnnHAR.loss(logits19, labels,'_19')
-    loss20=cnnHAR.loss(logits20, labels,'_20')
-    loss21=cnnHAR.loss(logits21, labels,'_21')
-    loss22=cnnHAR.loss(logits22, labels,'_22')
-    loss23=cnnHAR.loss(logits23, labels,'_23')
-    loss24=cnnHAR.loss(logits24, labels,'_24')
-    
+   
     train_op1 = cnnHAR.train(loss1, global_step,'_01')
     train_op2 = cnnHAR.train(loss2, global_step,'_02')
     train_op3 = cnnHAR.train(loss3, global_step,'_03')
     train_op4 = cnnHAR.train(loss4, global_step,'_04')
     train_op5 = cnnHAR.train(loss5, global_step,'_05')
     train_op6 = cnnHAR.train(loss6, global_step,'_06')
-    train_op7 = cnnHAR.train(loss7, global_step,'_07')
-    train_op8 = cnnHAR.train(loss8, global_step,'_08')
-    train_op9 = cnnHAR.train(loss9, global_step,'_09')
-    train_op10 = cnnHAR.train(loss10, global_step,'_10')
-    train_op11 = cnnHAR.train(loss11, global_step,'_11')
-    train_op12 = cnnHAR.train(loss12, global_step,'_12')
-    train_op13 = cnnHAR.train(loss13, global_step,'_13')
-    train_op14 = cnnHAR.train(loss14, global_step,'_14')
-    train_op15 = cnnHAR.train(loss15, global_step,'_15')
-    train_op16 = cnnHAR.train(loss16, global_step,'_16')
-    train_op17 = cnnHAR.train(loss17, global_step,'_17')
-    train_op18 = cnnHAR.train(loss18, global_step,'_18')
-    train_op19 = cnnHAR.train(loss19, global_step,'_19')
-    train_op20 = cnnHAR.train(loss20, global_step,'_20')
-    train_op21 = cnnHAR.train(loss21, global_step,'_21')
-    train_op22 = cnnHAR.train(loss22, global_step,'_22')
-    train_op23 = cnnHAR.train(loss23, global_step,'_23')
-    train_op24 = cnnHAR.train(loss24, global_step,'_24')
  
 
     extra_update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
@@ -315,60 +258,6 @@ def train():
         elif index==5:
             #print('~~~~~~~~~~~~~~~~train_op6')
             mon_sess.run([train_op6,extra_update_ops])
-        elif index==6:
-            #print('~~~~~~~~~~~~~~~~train_op1')
-            mon_sess.run([train_op7,extra_update_ops])
-        elif index==7:
-            #print('~~~~~~~~~~~~~~~~train_op2')
-            mon_sess.run([train_op8,extra_update_ops])
-        elif index==8:
-            #print('~~~~~~~~~~~~~~~~train_op3')
-            mon_sess.run([train_op9,extra_update_ops])
-        elif index==9:
-            #print('~~~~~~~~~~~~~~~~train_op4')
-            mon_sess.run([train_op10,extra_update_ops])
-        elif index==10:
-            #print('~~~~~~~~~~~~~~~~train_op5')
-            mon_sess.run([train_op11,extra_update_ops])
-        elif index==11:
-            #print('~~~~~~~~~~~~~~~~train_op6')
-            mon_sess.run([train_op12,extra_update_ops])
-        elif index==12:
-            #print('~~~~~~~~~~~~~~~~train_op6')
-            mon_sess.run([train_op13,extra_update_ops])
-        elif index==13:
-            #print('~~~~~~~~~~~~~~~~train_op2')
-            mon_sess.run([train_op14,extra_update_ops])
-        elif index==14:
-            #print('~~~~~~~~~~~~~~~~train_op3')
-            mon_sess.run([train_op15,extra_update_ops])
-        elif index==15:
-            #print('~~~~~~~~~~~~~~~~train_op4')
-            mon_sess.run([train_op16,extra_update_ops])
-        elif index==16:
-            #print('~~~~~~~~~~~~~~~~train_op5')
-            mon_sess.run([train_op17,extra_update_ops])
-        elif index==17:
-            #print('~~~~~~~~~~~~~~~~train_op6')
-            mon_sess.run([train_op18,extra_update_ops])
-        elif index==18:
-            #print('~~~~~~~~~~~~~~~~train_op1')
-            mon_sess.run([train_op19,extra_update_ops])
-        elif index==19:
-            #print('~~~~~~~~~~~~~~~~train_op2')
-            mon_sess.run([train_op20,extra_update_ops])
-        elif index==20:
-            #print('~~~~~~~~~~~~~~~~train_op3')
-            mon_sess.run([train_op21,extra_update_ops])
-        elif index==21:
-            #print('~~~~~~~~~~~~~~~~train_op4')
-            mon_sess.run([train_op22,extra_update_ops])
-        elif index==22:
-            #print('~~~~~~~~~~~~~~~~train_op5')
-            mon_sess.run([train_op23,extra_update_ops])
-        elif index==23:
-            #print('~~~~~~~~~~~~~~~~train_op6')
-            mon_sess.run([train_op24,extra_update_ops])
         i=i+1
         
         #print('~~~~~~~~~~~~~~~~one session ends~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
