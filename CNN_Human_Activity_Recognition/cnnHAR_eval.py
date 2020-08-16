@@ -228,13 +228,14 @@ def evaluate():
     
     # Build a Graph that computes the logits predictions from the
     # inference model
+    reshape1=cnnHAR.inference_cov11(signals)
     
-    logits1=cnnHAR.inference1(signals,'_01')
-    logits2=cnnHAR.inference1(signals,'_02')
-    logits3=cnnHAR.inference1(signals,'_03')
-    logits4=cnnHAR.inference1(signals,'_04')
-    logits5=cnnHAR.inference1(signals,'_05')
-    logits6=cnnHAR.inference1(signals,'_06')
+    logits1=cnnHAR.inference1(reshape1,'_01')
+    logits2=cnnHAR.inference1(reshape1,'_02')
+    logits3=cnnHAR.inference1(reshape1,'_03')
+    logits4=cnnHAR.inference1(reshape1,'_04')
+    logits5=cnnHAR.inference1(reshape1,'_05')
+    logits6=cnnHAR.inference1(reshape1,'_06')
     
     loss1=cnnHAR.loss(logits1, labels,'_01')
     loss2=cnnHAR.loss(logits2, labels,'_02')
