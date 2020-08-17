@@ -223,8 +223,8 @@ def train():
         return tf.train.SessionRunArgs(signals)  # Asks for signals.
 
       def after_run(self, run_context, run_values):
-        #if (self._step) % (10*log_frequency) == 0:
-        if self._step == max_steps-1:#:
+        if (self._step) % (10*log_frequency) == 0:
+       # if self._step == max_steps-1:#:
           #print('~~~~~~~~~~~~~~~~after run4~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
           cnnHAR_eval.main()
 
