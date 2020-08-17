@@ -236,7 +236,7 @@ def train():
                #_LoggerHook2(),
                _LoggerHook4()],#,save_checkpoint_steps=5000
         config=tf.ConfigProto(
-            log_device_placement=log_device_placement),save_checkpoint_steps=max_steps) as mon_sess:
+            log_device_placement=log_device_placement),save_checkpoint_steps=log_frequency) as mon_sess:
       i=0
       while not mon_sess.should_stop():
 #        mon_sess = tfdbg.LocalCLIDebugWrapperSession(mon_sess)
