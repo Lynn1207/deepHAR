@@ -99,7 +99,7 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
       cnt = 0
       step = 0
       accuracy=0
-      accuracies=np.zeros(2*num)E
+      accuracies=np.zeros(2*num)
       cnts=np.zeros(2*num)
       steps=np.zeros(2*num)
       simpleness=np.zeros((num,2*batch_size))
