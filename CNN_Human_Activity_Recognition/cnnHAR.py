@@ -162,7 +162,7 @@ def inference_cov11(signals):
                                                 stddev=5e-2,
                                                 wd=None)
            biases = _variable_on_cpu('biases', [64], tf.constant_initializer(0.0))#!!!
-           conv = tf.nn.conv1d(signals, kernel, [1,11,1], padding='SAME', data_format='NWC')
+           conv = tf.nn.conv1d(signals, kernel, [1,1,1], padding='SAME', data_format='NWC')
            pre_activation = tf.nn.bias_add(conv, biases)
            conv1 = tf.nn.relu(pre_activation, name=scope.name)
            _activation_summary(conv1)
@@ -456,7 +456,7 @@ def inference1(signals,index):
                                                 stddev=5e-2,
                                                 wd=None)
            biases = _variable_on_cpu('biases', [64], tf.constant_initializer(0.0))#!!!
-           conv = tf.nn.conv1d(signals, kernel, [1,3,1], padding='SAME', data_format='NWC')
+           conv = tf.nn.conv1d(signals, kernel, [1,1,1], padding='SAME', data_format='NWC')
            pre_activation = tf.nn.bias_add(conv, biases)
            conv1 = tf.nn.relu(pre_activation, name=scope.name)
            _activation_summary(conv1)
