@@ -153,7 +153,7 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
             a=int(samplelabels[i][0][0])
             b=np.argmax(predictions[i])
             print('label:',a)
-            print('prediction:',b))
+            print('prediction:',b)
             if a==b:
                 n_acc=n_acc+1
             if int(step/2)>=num:
