@@ -62,7 +62,7 @@ def read_cnnHAR(filename_queue):
   result.signal = tf.reshape(result.signal, [SIGNAL_SIZE, channels])
   # labels-1 cause the logits is defaulted to start with 0~NUM_CLASS-1
   result.label = tf.cast(
-      tf.strided_slice(record_bytes, [SIGNAL_SIZE], [SIGNAL_SIZE+1])-1, tf.float32)
+      tf.strided_slice(record_bytes, [SIGNAL_SIZE], [SIGNAL_SIZE+1]), tf.float32)
   #print('!!!!!!!!!!!!!!!!!!! result.label before reshape', result.label)
   result.label = tf.reshape(result.label, [1, 1])
   result.index = tf.cast(
