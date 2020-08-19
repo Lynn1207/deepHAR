@@ -150,9 +150,11 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
         #print(predictions.shape)
         n_acc=0
         for i in range(0, batch_size):
-            print('label:',samplelabels.shape)
-            print('prediction:',predictions.shape)
-            if int(samplelabels[i][0][0])==np.argmax(predictions[i]):
+            a=int(samplelabels[i][0][0])
+            b=np.argmax(predictions[i])
+            print('label:',a)
+            print('prediction:',b))
+            if a==b:
                 n_acc=n_acc+1
             if int(step/2)>=num:
                 simpleness[int(step/2)-num][int(step%2)*batch_size+i]=-math.log(predictions[i][int(samplelabels[i][0][0])])
