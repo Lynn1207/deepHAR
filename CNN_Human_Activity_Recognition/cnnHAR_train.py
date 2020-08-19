@@ -51,11 +51,11 @@ train_dir = '/home/ubuntu/deepHAR/CNN_Human_Activity_Recognition/cnnHAR_check'
 
 num=6 # number of nodes
 
-max_steps = num*7*4*110+1
+max_steps = num*11*4*110+1
 
 log_device_placement = False
 
-log_frequency = num*7*4 #
+log_frequency = num*11*4 #
 
 batch_size = cnnHAR.batch_size
 
@@ -247,7 +247,7 @@ def train():
         #mon_sess.run([train_op1,extra_update_ops])
         #print('~~~~~~~~~~~~~~~~%d step:'%i)
         
-        index=int(i%(num*7)/7)
+        index=int(i%(num*11)/11)
         if index==0:
             #print('~~~~~~~~~~~~~~~~train_op1')
             mon_sess.run([train_op1,extra_update_ops])
