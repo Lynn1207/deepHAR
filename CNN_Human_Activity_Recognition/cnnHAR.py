@@ -388,7 +388,7 @@ def inference_local45(local3):
     return local4
     
 def inference_output1(local4):
-    with tf.variable_scope('softmax_linear_01_02_03_04_05_06') as scope:
+    with tf.variable_scope('softmax_linear_01_04') as scope:
           weights = _variable_with_weight_decay('weights', [30, NUM_CLASSES],stddev=1/30.0, wd=None)
           biases = _variable_on_cpu('biases', [NUM_CLASSES],tf.constant_initializer(0.0))
           softmax_linear = tf.nn.softmax(tf.matmul(local4, weights)+biases,name=scope.name)
@@ -398,7 +398,7 @@ def inference_output1(local4):
     return softmax_linear
     
 def inference_output2(local4):
-    with tf.variable_scope('softmax_linear_03_04_05_06') as scope:
+    with tf.variable_scope('softmax_linear_02') as scope:
           weights = _variable_with_weight_decay('weights', [30, NUM_CLASSES],stddev=1/30.0, wd=None)
           biases = _variable_on_cpu('biases', [NUM_CLASSES],tf.constant_initializer(0.0))
           softmax_linear = tf.nn.softmax(tf.matmul(local4, weights)+biases,name=scope.name)
@@ -408,7 +408,7 @@ def inference_output2(local4):
     return softmax_linear
 
 def inference_output3(local4):
-    with tf.variable_scope('softmax_linear_04') as scope:
+    with tf.variable_scope('softmax_linear_03_06') as scope:
           weights = _variable_with_weight_decay('weights', [30, NUM_CLASSES],stddev=1/30.0, wd=None)
           biases = _variable_on_cpu('biases', [NUM_CLASSES],tf.constant_initializer(0.0))
           softmax_linear = tf.nn.softmax(tf.matmul(local4, weights)+biases,name=scope.name)
@@ -418,7 +418,7 @@ def inference_output3(local4):
     return softmax_linear
     
 def inference_output4(local4):
-    with tf.variable_scope('softmax_linear_04_05') as scope:
+    with tf.variable_scope('softmax_linear_05') as scope:
           weights = _variable_with_weight_decay('weights', [30, NUM_CLASSES],stddev=1/30.0, wd=None)
           biases = _variable_on_cpu('biases', [NUM_CLASSES],tf.constant_initializer(0.0))
           softmax_linear = tf.nn.softmax(tf.matmul(local4, weights)+biases,name=scope.name)
