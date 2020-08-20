@@ -95,7 +95,7 @@ def train():
     
     local21=cnnHAR.inference_local21(reshape1)
     local22=cnnHAR.inference_local22(reshape2)
-    local23=cnnHAR.inference_local23(reshape3)
+    local23=cnnHAR.inference_local23(reshape1)
     
     logits1=cnnHAR.inference1(local21,'_01')
     logits2=cnnHAR.inference1(local22,'_02')
