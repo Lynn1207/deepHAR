@@ -168,12 +168,13 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
         steps[int(step/2)]+=1
         step += 1
       
-      print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%mean1:', np.mean(cnts[num:2*num]))
-      m_loss=np.mean(np.mean(cnts[num:2*num]))
+      
+      m_loss=np.mean(simpleness,1)
+      print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%mean1:', simpleness)
       print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%mean1:', m_loss)
       for i in range(0, num):
         for j in range(0,2*batch_size):
-          if simpleness[i][j]<m_loss:
+          if simpleness[i][j]<m_loss[j]:
             simpleness[i][j]=1
           else:
             simpleness[i][j]=0
