@@ -169,7 +169,7 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
         step += 1
       
       
-      m_loss=np.mean(simpleness,1)
+      m_loss=np.mean(simpleness,0)
       print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%mean1:', simpleness)
       print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%mean1:', m_loss)
       for i in range(0, num):
