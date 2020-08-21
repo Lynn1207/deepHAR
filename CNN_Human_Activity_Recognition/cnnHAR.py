@@ -333,7 +333,7 @@ def inference_local34(local2):
     return local3
     
 def inference_local41(local3):
-    with tf.variable_scope('local4_01_03_04_05_06') as scope:
+    with tf.variable_scope('local4_01_02_03_04_05_06') as scope:
         weights = _variable_with_weight_decay('weights', shape=[512, 30], stddev=0.04, wd=None)
         biases = _variable_on_cpu('biases', [30], tf.constant_initializer(0.10))
             
@@ -388,7 +388,7 @@ def inference_local45(local3):
     return local4
     
 def inference_output1(local4):
-    with tf.variable_scope('softmax_linear_01_03_04_05') as scope:
+    with tf.variable_scope('softmax_linear_01_02_03_04_05_06') as scope:
           weights = _variable_with_weight_decay('weights', [30, NUM_CLASSES],stddev=1/30.0, wd=None)
           biases = _variable_on_cpu('biases', [NUM_CLASSES],tf.constant_initializer(0.0))
           softmax_linear = tf.nn.softmax(tf.matmul(local4, weights)+biases,name=scope.name)
