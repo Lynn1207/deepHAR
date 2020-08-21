@@ -170,6 +170,7 @@ def eval_once(saver,summary_writer,labels,loss1,logits1,loss2,logits2,loss3,logi
       
       print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%mean1:', np.mean(cnts[num:2*num]))
       m_loss=np.mean(np.mean(cnts[num:2*num]))
+      print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%mean1:', m_loss)
       for i in range(0, num):
         for j in range(0,2*batch_size):
           if simpleness[i][j]<m_loss:
