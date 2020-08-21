@@ -97,14 +97,13 @@ def train():
     local31=cnnHAR.inference_local31(local21)
     
     local41=cnnHAR.inference_local41(local31)
-    local42=cnnHAR.inference_local42(local31)
     
     logits1=cnnHAR.inference_output1(local41)
-    logits2=cnnHAR.inference_output2(local42)
+    logits2=logits1
     logits3=logits1
     logits4=logits1
     logits5=logits1
-    logits6=cnnHAR.inference_output3(local41)
+    logits6=logits1
     
     '''
     logits1=cnnHAR.inference1(local41,'_01')
