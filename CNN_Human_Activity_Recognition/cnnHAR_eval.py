@@ -240,7 +240,7 @@ def evaluate():
     
     # Build a Graph that computes the logits predictions from the
 
-    pool11=cnnHAR.inference_cov11(signals,'_01_02_03_04_05_06')
+    pool11=cnnHAR.inference_cov11(signals,'_01_03_04_06')
     reshape1=cnnHAR.inference_cov21(pool11,'_01')
     local21=cnnHAR.inference_local21(reshape1,'_01')
     local31=cnnHAR.inference_local31(local21,'_01')
@@ -248,8 +248,8 @@ def evaluate():
     logits1=cnnHAR.inference_output1(local41,'_01')
     
     
-    #pool12=cnnHAR.inference_cov11(signals,'_02')
-    reshape2=cnnHAR.inference_cov21(pool11,'_02')
+    pool12=cnnHAR.inference_cov11(signals,'_02_05')
+    reshape2=cnnHAR.inference_cov21(pool12,'_02')
     local22=cnnHAR.inference_local21(reshape2,'_02')
     local32=cnnHAR.inference_local31(local22,'_02')
     local42=cnnHAR.inference_local41(local32,'_02')
@@ -273,7 +273,7 @@ def evaluate():
 
     
     #pool15=cnnHAR.inference_cov11(signals,'_05')
-    reshape5=cnnHAR.inference_cov21(pool11,'_05')
+    reshape5=cnnHAR.inference_cov21(pool12,'_05')
     local25=cnnHAR.inference_local21(reshape5,'_05')
     local35=cnnHAR.inference_local31(local25,'_05')
     local45=cnnHAR.inference_local41(local35,'_05')
