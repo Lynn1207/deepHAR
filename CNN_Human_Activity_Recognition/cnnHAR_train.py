@@ -95,7 +95,7 @@ def train():
     #reshape3=cnnHAR.inference_cov21(pool11,'_03')
     local23=cnnHAR.inference_local21(reshape1,'_03_04_05_06')
     local33=cnnHAR.inference_local31(local23,'_03_04_05_06')
-    local43=cnnHAR.inference_local41(local33,'_03')
+    local43=cnnHAR.inference_local41(local33,'_03_04_05_06')
     logits3=cnnHAR.inference_output1(local43,'_03')
     
     
@@ -103,23 +103,23 @@ def train():
     #reshape4=cnnHAR.inference_cov21(pool11,'_04')
     #local24=cnnHAR.inference_local21(reshape1,'_04')
     #local34=cnnHAR.inference_local31(local23,'_04')
-    local44=cnnHAR.inference_local41(local33,'_04')
-    logits4=cnnHAR.inference_output1(local44,'_04')
+    #local44=cnnHAR.inference_local41(local33,'_04')
+    logits4=cnnHAR.inference_output1(local43,'_04')
 
     
     #pool15=cnnHAR.inference_cov11(signals,'_05')
     #reshape5=cnnHAR.inference_cov21(pool15,'_05')
     #local25=cnnHAR.inference_local21(reshape1,'_05')
     #local35=cnnHAR.inference_local31(local23,'_05')
-    local45=cnnHAR.inference_local41(local33,'_05')
-    logits5=cnnHAR.inference_output1(local45,'_05')
+    #local45=cnnHAR.inference_local41(local33,'_05')
+    logits5=cnnHAR.inference_output1(local43,'_05')
 
     #pool16=cnnHAR.inference_cov11(signals,'_06')
     #reshape6=cnnHAR.inference_cov21(pool11,'_06')
     #local26=cnnHAR.inference_local21(reshape1,'_06')
     #local36=cnnHAR.inference_local31(local23,'_06')
-    local46=cnnHAR.inference_local41(local33,'_06')
-    logits6=cnnHAR.inference_output1(local46,'_06')
+    #local46=cnnHAR.inference_local41(local33,'_06')
+    logits6=cnnHAR.inference_output1(local43,'_06')
     
 
     loss1=cnnHAR.loss(logits1, labels,'_01')
