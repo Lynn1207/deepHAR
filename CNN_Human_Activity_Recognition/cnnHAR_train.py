@@ -47,15 +47,15 @@ from tensorflow.python import debug as tfdbg
 import cnnHAR
 import cnnHAR_eval
 
-train_dir = '/home/ubuntu/deepHAR/CNN_Human_Activity_Recognition/cnnHAR_check'
+train_dir = '/Users/lynn/Documents/CNN_Human_Activity_Recognition/cnnHAR_check'
 
 num=6 # number of nodes
 
-max_steps = num*11*4*110*4+1
+max_steps = num*7*200+1 #400 epoch
 
 log_device_placement = False
 
-log_frequency = num*11*4 #
+log_frequency = num*7 # log per epoch
 
 batch_size = cnnHAR.batch_size
 
@@ -68,106 +68,75 @@ def train():
     # Force input pipeline to CPU:0 to avoid operations sometimes ending up on
     # GPU and resulting in a slow down.
     with tf.device('/cpu:0'):
-        signals, labels,indices = cnnHAR.distorted_inputs()
+        signals, labels = cnnHAR.distorted_inputs()
     print('<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>')
       
     # Build a Graph that computes the logits predictions from the
     # inference model.
     #training = tf.placeholder(tf.bool)
-    '''
-    reshape1=cnnHAR.inference_cov11(signals)
-    reshape2=cnnHAR.inference_cov12(signals)
     
-    local21=cnnHAR.inference_local21(reshape1)
-    local22=cnnHAR.inference_local22(reshape1)
-    local23=cnnHAR.inference_local23(reshape2)
+    pool11=cnnHAR.inference_cov11(signals,'_01_03_04_05_06')
+    reshape1=cnnHAR.inference_cov21(pool11,'_01')
+    local21=cnnHAR.inference_local21(reshape1,'_01')
+    local31=cnnHAR.inference_local31(local21,'_01')
+    local41=cnnHAR.inference_local41(local31,'_01')
+    logits1=cnnHAR.inference_output1(local41,'_01')
     
-    local31=cnnHAR.inference_local31(local21)
-    local32=cnnHAR.inference_local32(local22)
-    local33=cnnHAR.inference_local33(local23)
     
-    local41=cnnHAR.inference_local41(local31)
-    local42=cnnHAR.inference_local42(local32)
-    local43=cnnHAR.inference_local43(local33)
-    '''
-    reshape1=cnnHAR.inference_cov11(signals)
-    reshape2=cnnHAR.inference_cov12(signals)
+    pool12=cnnHAR.inference_cov11(signals,'_02')
+    reshape2=cnnHAR.inference_cov21(pool12,'_02')
+    local22=cnnHAR.inference_local21(reshape2,'_02')
+    local32=cnnHAR.inference_local31(local22,'_02')
+    local42=cnnHAR.inference_local41(local32,'_02')
+    logits2=cnnHAR.inference_output1(local42,'_02')
     
-    local21=cnnHAR.inference_local21(reshape1)
-    local22=cnnHAR.inference_local22(reshape2)
     
-    local31=cnnHAR.inference_local31(local21)
-    local32=cnnHAR.inference_local32(local22)
-    local33=cnnHAR.inference_local33(local21)
-    local34=cnnHAR.inference_local34(local22)
+    #pool13=cnnHAR.inference_cov11(signals,'_03')
+    reshape3=cnnHAR.inference_cov21(pool11,'_03')
+    local23=cnnHAR.inference_local21(reshape3,'_03')
+    local33=cnnHAR.inference_local31(local23,'_03')
+    local43=cnnHAR.inference_local41(local33,'_03')
+    logits3=cnnHAR.inference_output1(local43,'_03')
     
-    local41=cnnHAR.inference_local41(local31)
-    local42=cnnHAR.inference_local42(local32)
-    local43=cnnHAR.inference_local43(local33)
-    local44=cnnHAR.inference_local44(local34)
     
-    logits1=cnnHAR.inference_output1(local41)
-    logits2=cnnHAR.inference_output2(local42)
-    logits3=logits2
-    logits4=cnnHAR.inference_output3(local43)
-    logits5=logits1
-    logits6=cnnHAR.inference_output4(local44)
-    '''
-    logits1=cnnHAR.inference1(local41,'_01')
-    logits2=cnnHAR.inference1(local42,'_02')
-    logits3=cnnHAR.inference1(local42,'_03')
-    logits4=cnnHAR.inference1(local43,'_04')
-    logits5=cnnHAR.inference1(local41,'_05')
-    logits6=cnnHAR.inference1(local44,'_06')
-    '''
+    #pool14=cnnHAR.inference_cov11(signals,'_04')
+    reshape4=cnnHAR.inference_cov21(pool11,'_04')
+    local24=cnnHAR.inference_local21(reshape4,'_04')
+    local34=cnnHAR.inference_local31(local24,'_04')
+    local44=cnnHAR.inference_local41(local34,'_04')
+    logits4=cnnHAR.inference_output1(local44,'_04')
+
     
-    '''
-    reshape1=cnnHAR.inference_cov11(signals)
-    local21=cnnHAR.inference_local21(reshape1)
-    local31=cnnHAR.inference_local31(local21)
-    local41=cnnHAR.inference_local41(local31)
+    #pool15=cnnHAR.inference_cov11(signals,'_05')
+    reshape5=cnnHAR.inference_cov21(pool11,'_05')
+    local25=cnnHAR.inference_local21(reshape5,'_05')
+    local35=cnnHAR.inference_local31(local25,'_05')
+    local45=cnnHAR.inference_local41(local35,'_05')
+    logits5=cnnHAR.inference_output1(local45,'_05')
+
+    #pool16=cnnHAR.inference_cov11(signals,'_06')
+    reshape6=cnnHAR.inference_cov21(pool11,'_06')
+    local26=cnnHAR.inference_local21(reshape6,'_06')
+    local36=cnnHAR.inference_local31(local26,'_06')
+    local46=cnnHAR.inference_local41(local36,'_06')
+    logits6=cnnHAR.inference_output1(local46,'_06')
     
-    logits1=cnnHAR.inference_output1(local41)
-    logits2=logits1
-    logits3=logits1
-    logits4=logits1
-    logits5=logits1
-    logits6=logits1
-    
-    logits7=logits1
-    logits8=logits1
-    logits9=logits1
-    logits10=logits1
-    logits11=logits1
-    logits12=logits1
-    logits13=logits1
-    logits14=logits1
-    logits15=logits1
-    logits16=logits1
-    logits17=logits1
-    logits18=logits1
-    logits19=logits1
-    logits20=logits1
-    logits21=logits1
-    logits22=logits1
-    logits23=logits1
-    logits24=logits1
-    '''
+
     loss1=cnnHAR.loss(logits1, labels,'_01')
     loss2=cnnHAR.loss(logits2, labels,'_02')
     loss3=cnnHAR.loss(logits3, labels,'_03')
     loss4=cnnHAR.loss(logits4, labels,'_04')
     loss5=cnnHAR.loss(logits5, labels,'_05')
     loss6=cnnHAR.loss(logits6, labels,'_06')
-   
+                                     
     train_op1 = cnnHAR.train(loss1, global_step,'_01')
     train_op2 = cnnHAR.train(loss2, global_step,'_02')
     train_op3 = cnnHAR.train(loss3, global_step,'_03')
     train_op4 = cnnHAR.train(loss4, global_step,'_04')
     train_op5 = cnnHAR.train(loss5, global_step,'_05')
     train_op6 = cnnHAR.train(loss6, global_step,'_06')
- 
-
+  
+    
     extra_update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
     class _LoggerHook(tf.train.SessionRunHook):
       """Logs loss and runtime."""
@@ -180,15 +149,32 @@ def train():
         self._step += 1
         #print('~~~~~~~~~~~~~~~~before run1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         #tmp = tf.concat([labels,signals],1)
-        return tf.train.SessionRunArgs(loss1)  # Asks for loss value.
+        '''
+        index=int(self._step%(num*7)/7)
+        if index==0:
+            return tf.train.SessionRunArgs(loss1)
+        elif index==1:
+            return tf.train.SessionRunArgs(loss2)
+        elif index==2:
+            return tf.train.SessionRunArgs(loss3)
+        elif index==3:
+            return tf.train.SessionRunArgs(loss4)
+        elif index==4:
+            return tf.train.SessionRunArgs(loss5)
+        elif index==5:
+            return tf.train.SessionRunArgs(loss6)
+        '''
+        # Asks for loss value.
 
       def after_run(self, run_context, run_values):
 #        if self._step == 1000:
 #          #tf.Session().run(tf.global_variables_initializer())
 #          ndar = np.array(run_values.results)
 #          np.savetxt("logits.csv", ndar.reshape(128,256), delimiter=",")
-        if self._step % log_frequency == 0:
+        
+        if (self._step+1) % log_frequency == 0:
           #print('~~~~~~~~~~~~~~~~after run1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+          '''
           current_time = time.time()
           duration = current_time - self._start_time
           self._start_time = current_time
@@ -196,10 +182,12 @@ def train():
           loss_value = run_values.results
           examples_per_sec = log_frequency * batch_size / duration
           sec_per_batch = float(duration / log_frequency)
-
           format_str = ('%s: step %d, loss = %.8f (%.1f examples/sec; %.3f '
                         'sec/batch)')
-          print (format_str % (datetime.now(), self._step, loss_value, examples_per_sec, sec_per_batch))
+          '''
+          format_str = ('%s: step %d')
+          print (format_str % (datetime.now(), self._step+1))
+         
     class _LoggerHook2(tf.train.SessionRunHook):
       """Logs signals."""
 
@@ -244,8 +232,8 @@ def train():
         return tf.train.SessionRunArgs(signals)  # Asks for signals.
 
       def after_run(self, run_context, run_values):
-        if (self._step) % (10*log_frequency) == 0:
-       # if self._step == max_steps-1:#:
+        #if (self._step+1)% (10*log_frequency) == 0:
+        if self._step == max_steps-1:#:
           #print('~~~~~~~~~~~~~~~~after run4~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
           cnnHAR_eval.main()
 
@@ -257,14 +245,15 @@ def train():
                #_LoggerHook2(),
                _LoggerHook4()],#,save_checkpoint_steps=5000
         config=tf.ConfigProto(
-            log_device_placement=log_device_placement),save_checkpoint_steps=log_frequency) as mon_sess:
+            log_device_placement=log_device_placement),save_checkpoint_steps=max_steps-1) as mon_sess:
+      ''',save_checkpoint_steps=10*log_frequency'''
       i=0
       while not mon_sess.should_stop():
 #        mon_sess = tfdbg.LocalCLIDebugWrapperSession(mon_sess)
         #mon_sess.run([train_op1,extra_update_ops])
         #print('~~~~~~~~~~~~~~~~%d step:'%i)
         
-        index=int(i%(num*11)/11)
+        index=int(i%(num*7)/7)
         if index==0:
             #print('~~~~~~~~~~~~~~~~train_op1')
             mon_sess.run([train_op1,extra_update_ops])
@@ -283,6 +272,26 @@ def train():
         elif index==5:
             #print('~~~~~~~~~~~~~~~~train_op6')
             mon_sess.run([train_op6,extra_update_ops])
+        '''
+        elif index==6:
+            #print('~~~~~~~~~~~~~~~~train_op1')
+            mon_sess.run([train_op7,extra_update_ops])
+        elif index==7:
+            #print('~~~~~~~~~~~~~~~~train_op2')
+            mon_sess.run([train_op8,extra_update_ops])
+        elif index==8:
+            #print('~~~~~~~~~~~~~~~~train_op3')
+            mon_sess.run([train_op9,extra_update_ops])
+        elif index==9:
+            #print('~~~~~~~~~~~~~~~~train_op4')
+            mon_sess.run([train_op10,extra_update_ops])
+        elif index==10:
+            #print('~~~~~~~~~~~~~~~~train_op5')
+            mon_sess.run([train_op11,extra_update_ops])
+        elif index==11:
+            #print('~~~~~~~~~~~~~~~~train_op6')
+            mon_sess.run([train_op12,extra_update_ops])
+        '''
         i=i+1
         
         #print('~~~~~~~~~~~~~~~~one session ends~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
