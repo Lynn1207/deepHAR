@@ -26,18 +26,17 @@ import sys
 from six.moves import xrange  # pylint: disable=redefined-builtin
 import tensorflow.compat.v1 as tf
 
-# Process images of this size. Note that this differs from the original CIFAR
-# image size of 32 x 32. If one alters this number, then the entire model
-# architecture will change and any model would need to be retrained.
-SIGNAL_SIZE = 9
+# Process sensing data "image" of this size, 128*6.
+# each chanel like acc_x is 128 length which is sata collected for 2.56s. 
+SIGNAL_SIZE = 128 
 channels = 1
-num=6
-
-
-# Global constants describing the CIFAR-10 data set.
-NUM_CLASSES = 2
-NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = 32*num
-NUM_EXAMPLES_PER_EPOCH_FOR_EVAL = 128*num/6
+batch_per_user_train=7
+batch_per_user_test=2
+num_user=6
+# Global constants describing the cnnHAR data set.
+NUM_CLASSES = 6
+NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = 32*num_user*batch_per_user_train#1 min data
+NUM_EXAMPLES_PER_EPOCH_FOR_EVAL = 32*num_user*batch_per_user_test
 
 def read_cnnHAR(filename_queue):
 
@@ -52,25 +51,20 @@ def read_cnnHAR(filename_queue):
   result.key, value = reader.read(filename_queue)
   
   # Convert from a string to a vector of uint8 that is record_bytes long.
-  record_defaults = [[1.0] for col in range(SIGNAL_SIZE+2)]
+  record_defaults = [[1.0] for col in range(SIGNAL_SIZE*channels+1)]
   
   record_bytes = tf.decode_csv(value, record_defaults = record_defaults)
   #print('!!!!!!!!!!!!!!!!!!! result.type', record_bytes)
   # The first bytes represent the label, which we convert from uint8->int32.
   result.signal = tf.cast(
-      tf.strided_slice(record_bytes, [0], [SIGNAL_SIZE]), tf.float32)
+      tf.strided_slice(record_bytes, [1], [SIGNAL_SIZE+1]), tf.float32)
   result.signal = tf.reshape(result.signal, [SIGNAL_SIZE, channels])
   # labels-1 cause the logits is defaulted to start with 0~NUM_CLASS-1
   result.label = tf.cast(
-      tf.strided_slice(record_bytes, [SIGNAL_SIZE], [SIGNAL_SIZE+1]), tf.float32)
+      tf.strided_slice(record_bytes, [0], [1])-1, tf.float32)
   #print('!!!!!!!!!!!!!!!!!!! result.label before reshape', result.label)
   result.label = tf.reshape(result.label, [1, 1])
-  result.index = tf.cast(
-      tf.strided_slice(record_bytes, [SIGNAL_SIZE+1], [SIGNAL_SIZE+2]), tf.float32)
-  #print('!!!!!!!!!!!!!!!!!!! result.label before reshape', result.label)
-  result.index = tf.reshape(result.index, [1, 1])
-  
-  
+    
   return result
 
 """
@@ -102,25 +96,25 @@ def read_cifar10_2(filename_queue):
   return result
 """
 
-def _generate_image_and_label_batch(signal, label, index, min_queue_examples,
+def _generate_image_and_label_batch(signal, label, min_queue_examples,
                                     batch_size, shuffle):
   print('????????? signal shape BEFORE batch', signal.get_shape())
   num_preprocess_threads = 1
-  if shuffle:
+  """if shuffle:
     signals, label_batch,indices = tf.train.shuffle_batch(
         [signal, label,index],
         batch_size=batch_size,
         num_threads=num_preprocess_threads,
         capacity=min_queue_examples + 3 * batch_size,
         min_after_dequeue=min_queue_examples)
-  else:
-    signals, label_batch,indices = tf.train.batch(
-        [signal, label,index],
-        batch_size=batch_size,
-        num_threads=num_preprocess_threads,
-        capacity=min_queue_examples + 3 * batch_size)
+  else:"""
+  signals, label_batch= tf.train.batch(
+            [signal, label],
+            batch_size=batch_size,
+            num_threads=num_preprocess_threads,
+            capacity=min_queue_examples + 3 * batch_size)
   print('????????? signal shape AFTER batch reshape', signals.get_shape())
-  return signals, label_batch,indices #tf.reshape(label_batch, [batch_size, SIGNAL_SIZE, 1])
+  return signals, label_batch #tf.reshape(label_batch, [batch_size, SIGNAL_SIZE, 1])
 
 def distorted_inputs(data_dir, batch_size):
   """Construct distorted input for CIFAR training using the Reader ops.
@@ -133,7 +127,7 @@ def distorted_inputs(data_dir, batch_size):
     images: Images. 4D tensor of [batch_size, IMAGE_SIZE, IMAGE_SIZE, 3] size.
     labels: Labels. 1D tensor of [batch_size] size.
   """
-  filename = [os.path.join(data_dir, '0106_train.csv')]
+  filename = [os.path.join(data_dir, '4_train.csv')]
   #if not tf.io.gfile.exists(filename):
     #raise ValueError('Failed to find file: ' + filename)
 
@@ -146,7 +140,6 @@ def distorted_inputs(data_dir, batch_size):
     signal = read_input.signal
     signal.set_shape([SIGNAL_SIZE, channels])
     read_input.label.set_shape([1, 1])
-    read_input.index.set_shape([1, 1])
     #print('?????????? singals: %f'% signal[1][0])
     
     # Ensure that the random shuffling has good mixing properties.
@@ -157,17 +150,17 @@ def distorted_inputs(data_dir, batch_size):
            'This will take a few minutes.' % min_queue_examples)
 
   # Generate a batch of images and labels by building up a queue of examples.
-  return _generate_image_and_label_batch(signal, read_input.label,read_input.index,
+  return _generate_image_and_label_batch(signal, read_input.label,
                                          min_queue_examples, batch_size,
                                          shuffle=False)
 
 def inputs(eval_data, data_dir, batch_size):
 
   if not eval_data:
-    filenames = [os.path.join(data_dir, '0106_train.csv')]
+    filenames = [os.path.join(data_dir, '4_train.csv')]
     num_examples_per_epoch = NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN
   else:
-    filenames = [os.path.join(data_dir, '0106_test.csv')]
+    filenames = [os.path.join(data_dir, '4_testcom.csv')]
     num_examples_per_epoch = NUM_EXAMPLES_PER_EPOCH_FOR_EVAL
 
   #if not tf.io.gfile.exists(filenames):
@@ -182,7 +175,7 @@ def inputs(eval_data, data_dir, batch_size):
 
     signal.set_shape([SIGNAL_SIZE, channels])
     read_input.label.set_shape([1, 1])
-    read_input.index.set_shape([1, 1])
+    
     # Ensure that the random shuffling has good mixing properties.
     min_fraction_of_examples_in_queue = 0.4
     min_queue_examples = int(num_examples_per_epoch *
@@ -191,7 +184,7 @@ def inputs(eval_data, data_dir, batch_size):
                              'This will take a few minutes.' % min_queue_examples)
 
   # Generate a batch of images and labels by building up a queue of examples.
-  return _generate_image_and_label_batch(signal, read_input.label,read_input.index,
+  return _generate_image_and_label_batch(signal, read_input.label,
                                          min_queue_examples, batch_size,
                                          shuffle=False)
 
