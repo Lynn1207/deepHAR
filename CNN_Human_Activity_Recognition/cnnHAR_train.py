@@ -75,7 +75,7 @@ def train():
     # inference model.
     #training = tf.placeholder(tf.bool)
     
-    pool11=cnnHAR.inference_cov11(signals,'_01')
+    pool11=cnnHAR.inference_cov11(signals,'_01_02_03_04_05_06')
     reshape1=cnnHAR.inference_cov21(pool11,'_01')
     local21=cnnHAR.inference_local21(reshape1,'_01')
     local31=cnnHAR.inference_local31(local21,'_01')
@@ -83,39 +83,39 @@ def train():
     logits1=cnnHAR.inference_output1(local41,'_01')
     
     
-    pool12=cnnHAR.inference_cov11(signals,'_02')
-    reshape2=cnnHAR.inference_cov21(pool12,'_02')
+    #pool12=cnnHAR.inference_cov11(signals,'_02')
+    reshape2=cnnHAR.inference_cov21(pool11,'_02')
     local22=cnnHAR.inference_local21(reshape2,'_02')
     local32=cnnHAR.inference_local31(local22,'_02')
     local42=cnnHAR.inference_local41(local32,'_02')
     logits2=cnnHAR.inference_output1(local42,'_02')
     
     
-    pool13=cnnHAR.inference_cov11(signals,'_03')
-    reshape3=cnnHAR.inference_cov21(pool13,'_03')
+    #pool13=cnnHAR.inference_cov11(signals,'_03')
+    reshape3=cnnHAR.inference_cov21(pool11,'_03')
     local23=cnnHAR.inference_local21(reshape3,'_03')
     local33=cnnHAR.inference_local31(local23,'_03')
     local43=cnnHAR.inference_local41(local33,'_03')
     logits3=cnnHAR.inference_output1(local43,'_03')
     
     
-    pool14=cnnHAR.inference_cov11(signals,'_04')
-    reshape4=cnnHAR.inference_cov21(pool14,'_04')
+    #pool14=cnnHAR.inference_cov11(signals,'_04')
+    reshape4=cnnHAR.inference_cov21(pool11,'_04')
     local24=cnnHAR.inference_local21(reshape4,'_04')
     local34=cnnHAR.inference_local31(local24,'_04')
     local44=cnnHAR.inference_local41(local34,'_04')
     logits4=cnnHAR.inference_output1(local44,'_04')
 
     
-    pool15=cnnHAR.inference_cov11(signals,'_05')
-    reshape5=cnnHAR.inference_cov21(pool15,'_05')
+    #pool15=cnnHAR.inference_cov11(signals,'_05')
+    reshape5=cnnHAR.inference_cov21(pool11,'_05')
     local25=cnnHAR.inference_local21(reshape5,'_05')
     local35=cnnHAR.inference_local31(local25,'_05')
     local45=cnnHAR.inference_local41(local35,'_05')
     logits5=cnnHAR.inference_output1(local45,'_05')
 
-    pool16=cnnHAR.inference_cov11(signals,'_06')
-    reshape6=cnnHAR.inference_cov21(pool16,'_06')
+    #pool16=cnnHAR.inference_cov11(signals,'_06')
+    reshape6=cnnHAR.inference_cov21(pool11,'_06')
     local26=cnnHAR.inference_local21(reshape6,'_06')
     local36=cnnHAR.inference_local31(local26,'_06')
     local46=cnnHAR.inference_local41(local36,'_06')
