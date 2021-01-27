@@ -83,9 +83,11 @@ def _variable_with_weight_decay(name, shape, stddev, wd, index):
       shape,
       tf.truncated_normal_initializer(stddev=stddev, dtype=dtype))
   #i=var.op.name.find('/')-2
+  '''
   if wd is not None:
     weight_decay = tf.multiply(tf.nn.l2_loss(var), wd, name='weight_loss')
     tf.add_to_collection('losses'+index, weight_decay)
+  '''
   return var
   
 def _variable_on_cpu(name, shape, initializer):
