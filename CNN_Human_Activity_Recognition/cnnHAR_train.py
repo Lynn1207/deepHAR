@@ -149,7 +149,7 @@ def train():
         self._step += 1
         #print('~~~~~~~~~~~~~~~~before run1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         #tmp = tf.concat([labels,signals],1)
-        
+        '''
         index=int(self._step%(num*7)/7)
         if index==0:
             return tf.train.SessionRunArgs(loss1)
@@ -163,7 +163,8 @@ def train():
             return tf.train.SessionRunArgs(loss5)
         elif index==5:
             return tf.train.SessionRunArgs(loss6)
-        
+        '''
+        return tf.train.SessionRunArgs(labels)
         # Asks for loss value.
 
       def after_run(self, run_context, run_values):
