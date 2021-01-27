@@ -86,7 +86,7 @@ def train():
     #pool12=cnnHAR.inference_cov11(signals,'_02')
     reshape2=cnnHAR.inference_cov21(pool11,'_02_03_04')
     local22=cnnHAR.inference_local21(reshape2,'_02_03_04')
-    local32=cnnHAR.inference_local31(local22,'_02')
+    local32=cnnHAR.inference_local31(local22,'_02_03_04')
     local42=cnnHAR.inference_local41(local32,'_02')
     logits2=cnnHAR.inference_output1(local42,'_02')
     
@@ -94,31 +94,31 @@ def train():
     #pool13=cnnHAR.inference_cov11(signals,'_03')
     #reshape3=cnnHAR.inference_cov21(pool11,'_03')
     #local23=cnnHAR.inference_local21(reshape2,'_03')
-    local33=cnnHAR.inference_local31(local22,'_03')
-    local43=cnnHAR.inference_local41(local33,'_03')
+    #local33=cnnHAR.inference_local31(local22,'_03')
+    local43=cnnHAR.inference_local41(local32,'_03')
     logits3=cnnHAR.inference_output1(local43,'_03')
     
     
     #pool14=cnnHAR.inference_cov11(signals,'_04')
     #reshape4=cnnHAR.inference_cov21(pool11,'_04')
     #local24=cnnHAR.inference_local21(reshape2,'_04')
-    local34=cnnHAR.inference_local31(local22,'_04')
-    local44=cnnHAR.inference_local41(local34,'_04')
+    #local34=cnnHAR.inference_local31(local22,'_04')
+    local44=cnnHAR.inference_local41(local32,'_04')
     logits4=cnnHAR.inference_output1(local44,'_04')
 
     
     pool15=cnnHAR.inference_cov11(signals,'_05_06')
     reshape5=cnnHAR.inference_cov21(pool15,'_05_06')
     local25=cnnHAR.inference_local21(reshape5,'_05_06')
-    local35=cnnHAR.inference_local31(local25,'_05')
+    local35=cnnHAR.inference_local31(local25,'_05_06')
     local45=cnnHAR.inference_local41(local35,'_05')
     logits5=cnnHAR.inference_output1(local45,'_05')
 
     #pool16=cnnHAR.inference_cov11(signals,'_06')
     #reshape6=cnnHAR.inference_cov21(pool15,'_06')
     #local26=cnnHAR.inference_local21(reshape5,'_06')
-    local36=cnnHAR.inference_local31(local25,'_06')
-    local46=cnnHAR.inference_local41(local36,'_06')
+    #local36=cnnHAR.inference_local31(local25,'_06')
+    local46=cnnHAR.inference_local41(local35,'_06')
     logits6=cnnHAR.inference_output1(local46,'_06')
     
 
