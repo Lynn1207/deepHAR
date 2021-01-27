@@ -51,7 +51,7 @@ train_dir = '/home/ubuntu/deepHAR/CNN_Human_Activity_Recognition/cnnHAR_check'
 
 num=6 # number of nodes
 
-max_steps = num*7*450+1 #400 epoch
+max_steps = num*7*600+1 #400 epoch
 
 log_device_placement = False
 
