@@ -51,7 +51,7 @@ train_dir = '/home/ubuntu/deepHAR/CNN_Human_Activity_Recognition/cnnHAR_check'
 
 num=6 # number of nodes
 
-max_steps = num*7*600+1 #400 epoch
+max_steps = num*7*200+1 #400 epoch
 
 log_device_placement = False
 
@@ -149,7 +149,7 @@ def train():
         self._step += 1
         #print('~~~~~~~~~~~~~~~~before run1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         #tmp = tf.concat([labels,signals],1)
-        '''
+        
         index=int(self._step%(num*7)/7)
         if index==0:
             return tf.train.SessionRunArgs(loss1)
@@ -163,7 +163,7 @@ def train():
             return tf.train.SessionRunArgs(loss5)
         elif index==5:
             return tf.train.SessionRunArgs(loss6)
-        '''
+        
         # Asks for loss value.
 
       def after_run(self, run_context, run_values):
@@ -185,8 +185,8 @@ def train():
           format_str = ('%s: step %d, loss = %.8f (%.1f examples/sec; %.3f '
                         'sec/batch)')
           '''
-          format_str = ('%s: step %d')
-          print (format_str % (datetime.now(), self._step+1))
+          format_str = ('%s: step %d, loss%d = %.8f')
+          print (format_str % (datetime.now(), self._step+1, int(self._step%(num*7)/7), run_values.results))
          
     class _LoggerHook2(tf.train.SessionRunHook):
       """Logs signals."""
