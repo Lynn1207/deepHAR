@@ -136,7 +136,7 @@ def _add_loss_summaries(total_loss, index):
   loss_averages = tf.train.ExponentialMovingAverage(0.9999, name='avg')
   losses = tf.get_collection('losses'+index)
   loss_averages_op = loss_averages.apply(losses + [total_loss])
-
+  tf.add_to_collection('losses'+index, total_loss)
 
   # Attach a scalar summary to all individual losses and the total loss; do the
   # same for the averaged version of the losses.
@@ -165,7 +165,7 @@ def inference_cov11(signals, index):
            print ('<<<<<<<<<<<<<<<<<<<<Shape of conv1 :',conv1.get_shape())
            
          # pool1
-    pool1 = tf.nn.max_pool1d(conv1, ksize=[1,4,1], strides=[1,1,1],padding='VALID',name='pool1')
+    pool1 = tf.nn.max_pool1d(conv1, ksize=[1,4,1], strides=[1,1,1],padding='VALID',name='pool1'+index)
     print ('<<<<<<<<<<<<<<<<<<<<Shape of pool1 :',pool1.get_shape())
     """6x1x64"""
     
@@ -187,7 +187,7 @@ def inference_cov21(pool1, index):
            print ('<<<<<<<<<<<<<<<<<<<<Shape of conv2:',conv2.get_shape())
            
          # pool1
-    pool2 = tf.nn.max_pool1d(conv2, ksize=[1,3,1], strides=[1,1,1],padding='VALID',name='pool2')
+    pool2 = tf.nn.max_pool1d(conv2, ksize=[1,3,1], strides=[1,1,1],padding='VALID',name='pool2'+index)
     print ('<<<<<<<<<<<<<<<<<<<<Shape of pool2 :',pool2.get_shape()) 
     reshape = tf.keras.layers.Flatten()(pool2)
     print ('<<<<<<<<<<<<<<<<<<<<Shape of reshape :',reshape.get_shape()) 
@@ -269,11 +269,13 @@ def loss(logits, labels, index):
     loss=loss/32.0
     
     print('loss@@@@@@@@@@@@##############',loss)
+    '''
     tf.add_to_collection('losses'+index, loss)
     # The total loss is defined as the cross entropy loss plus all of the weight
     # decay terms (L2 loss).
     total_loss=tf.add_n(tf.get_collection('losses'+index),name='total_loss')
-    return total_loss
+    '''
+    return loss
     
     
 def train(total_loss, global_step,index):#index is a string e.g. '_1'
