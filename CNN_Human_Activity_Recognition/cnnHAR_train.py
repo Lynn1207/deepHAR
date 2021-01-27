@@ -229,7 +229,7 @@ def train():
       def before_run(self, run_context):
         self._step += 1
         #print('~~~~~~~~~~~~~~~~before run4~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        return tf.train.SessionRunArgs(signals)  # Asks for signals.
+        #return tf.train.SessionRunArgs(signals)  # Asks for signals.
 
       def after_run(self, run_context, run_values):
         #if (self._step+1)% (10*log_frequency) == 0:
