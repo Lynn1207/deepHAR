@@ -75,7 +75,7 @@ def train():
     # inference model.
     #training = tf.placeholder(tf.bool)
     
-    pool11=cnnHAR.inference_cov11(signals,'_01_02_03_04#')
+    pool11=cnnHAR.inference_cov11(signals,'_01_02_03_04')
     reshape1=cnnHAR.inference_cov21(pool11,'_01')
     local21=cnnHAR.inference_local21(reshape1,'_01')
     local31=cnnHAR.inference_local31(local21,'_01')
