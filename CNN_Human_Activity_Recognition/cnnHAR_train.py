@@ -149,7 +149,7 @@ def train():
         self._step += 1
         #print('~~~~~~~~~~~~~~~~before run1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         #tmp = tf.concat([labels,signals],1)
-        '''
+        
         index=int(self._step%(num*7)/7)
         if index==0:
             return tf.train.SessionRunArgs(loss1)
@@ -163,8 +163,7 @@ def train():
             return tf.train.SessionRunArgs(loss5)
         elif index==5:
             return tf.train.SessionRunArgs(loss6)
-        '''
-        return tf.train.SessionRunArgs(labels)
+        
         # Asks for loss value.
 
       def after_run(self, run_context, run_values):
@@ -173,7 +172,7 @@ def train():
 #          ndar = np.array(run_values.results)
 #          np.savetxt("logits.csv", ndar.reshape(128,256), delimiter=",")
         
-        if int((self._step-1) / log_frequency)%5==0:#(self._step-1) % (log_frequency)== 0:
+        if int((self._step-1) / log_frequency)%5==0 and (self._step%(num*7)+1)%7==0:#(self._step-1) % (log_frequency)== 0:
           #print('~~~~~~~~~~~~~~~~after run1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
           '''
           current_time = time.time()
@@ -186,9 +185,8 @@ def train():
           format_str = ('%s: step %d, loss = %.8f (%.1f examples/sec; %.3f '
                         'sec/batch)')
           '''
-          format_str = ('%s: step %d loss%d')# = %.8f')
-          print(format_str % (datetime.now(), self._step+1, int(self._step%(num*7)/7)+1))#, run_values.results))
-          print(run_values.results)
+          format_str = ('%s: step %d loss%d = %.8f')
+          print(format_str % (datetime.now(), self._step+1, int(self._step%(num*7)/7)+1, run_values.results))
          
     class _LoggerHook2(tf.train.SessionRunHook):
       """Logs signals."""
