@@ -172,7 +172,7 @@ def train():
 #          ndar = np.array(run_values.results)
 #          np.savetxt("logits.csv", ndar.reshape(128,256), delimiter=",")
         
-        if int((self._step-1) / log_frequency)%10==0 and (self._step%(num*7)+1)%7==0:#(self._step-1) % (log_frequency)== 0:
+        if int((self._step-1) / log_frequency)%10==0 and (self._step%(num*7)+1)%7==0 and int(self._step%(num*7)/7)==0:#(self._step-1) % (log_frequency)== 0:
           #print('~~~~~~~~~~~~~~~~after run1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
           '''
           current_time = time.time()
