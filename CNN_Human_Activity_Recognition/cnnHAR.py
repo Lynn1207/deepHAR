@@ -152,7 +152,7 @@ def _add_loss_summaries(total_loss, index):
   return loss_averages_op
   
 def inference_cov11(signals, index):
-    print ('<<<<<<<<<<<<<<<<<<<<Shape of signals :',signals.get_shape())
+    #print ('<<<<<<<<<<<<<<<<<<<<Shape of signals :',signals.get_shape())
     with tf.variable_scope('conv1'+index) as scope:
            kernel = _variable_with_weight_decay('weights',
                                                 shape=[ 32, 1, 64],
@@ -168,7 +168,7 @@ def inference_cov11(signals, index):
            
          # pool1
     pool1 = tf.nn.max_pool1d(conv1, ksize=[1,4,1], strides=[1,1,1],padding='VALID',name='pool1'+index)
-    print ('<<<<<<<<<<<<<<<<<<<<Shape of pool1 :',pool1.get_shape())
+    #print ('<<<<<<<<<<<<<<<<<<<<Shape of pool1 :',pool1.get_shape())
     """6x1x64"""
     
     return pool1
@@ -186,13 +186,13 @@ def inference_cov21(pool1, index):
            pre_activation = tf.nn.bias_add(conv, biases)
            conv2 = tf.nn.relu(pre_activation, name=scope.name)
            _activation_summary(conv2)
-           print ('<<<<<<<<<<<<<<<<<<<<Shape of conv2:',conv2.get_shape())
+           #print ('<<<<<<<<<<<<<<<<<<<<Shape of conv2:',conv2.get_shape())
            
          # pool1
     pool2 = tf.nn.max_pool1d(conv2, ksize=[1,3,1], strides=[1,1,1],padding='VALID',name='pool2'+index)
-    print ('<<<<<<<<<<<<<<<<<<<<Shape of pool2 :',pool2.get_shape()) 
+    #print ('<<<<<<<<<<<<<<<<<<<<Shape of pool2 :',pool2.get_shape()) 
     reshape = tf.keras.layers.Flatten()(pool2)
-    print ('<<<<<<<<<<<<<<<<<<<<Shape of reshape :',reshape.get_shape()) 
+    #print ('<<<<<<<<<<<<<<<<<<<<Shape of reshape :',reshape.get_shape()) 
     reshape = tf.cast(reshape, tf.float64)
     """2x32"""
     return reshape
@@ -209,7 +209,7 @@ def inference_local21(reshape,index):
         biases = _variable_on_cpu('biases', [1024], tf.constant_initializer(0.10))
         
         local2 = tf.nn.relu(tf.matmul(reshape, weights) + biases, name=scope.name)
-        print ('!!!!!!!!!!!!!!!Shape of local2 :', local2.get_shape())
+        #print ('!!!!!!!!!!!!!!!Shape of local2 :', local2.get_shape())
         _activation_summary(local2)
         
     return local2
@@ -225,7 +225,7 @@ def inference_local31(local2,index):
         biases = _variable_on_cpu('biases', [512], tf.constant_initializer(0.10))
         
         local3 = tf.nn.relu(tf.matmul(local2, weights) + biases, name=scope.name)
-        print ('!!!!!!!!!!!!!!!Shape of local3 :', local3.get_shape())
+        #print ('!!!!!!!!!!!!!!!Shape of local3 :', local3.get_shape())
         _activation_summary(local3)
         
     return local3
@@ -238,7 +238,7 @@ def inference_local41(local3,index):
         biases = _variable_on_cpu('biases', [30], tf.constant_initializer(0.10))
             
         local4 = tf.nn.relu(tf.matmul(local3, weights) + biases, name=scope.name)
-        print ('!!!!!!!!!!!!!!!Shape of local4 :', local4.get_shape())#256
+        #print ('!!!!!!!!!!!!!!!Shape of local4 :', local4.get_shape())#256
         _activation_summary(local4)
  
     return local4
@@ -270,7 +270,7 @@ def loss(logits, labels, index):
         i+=1
     loss=loss/32.0
     
-    print('loss@@@@@@@@@@@@##############',loss)
+    #print('loss@@@@@@@@@@@@##############',loss)
     '''
     tf.add_to_collection('losses'+index, loss)
     # The total loss is defined as the cross entropy loss plus all of the weight
@@ -296,7 +296,7 @@ def train(total_loss, global_step,index):#index is a string e.g. '_1'
  for var in tf.trainable_variables():
      if var.op.name.find(index)!= -1:
         var_list.append(var)
-        print('@@@@@@@@@@@@@@@@@@'+var.op.name)
+        #print('@@@@@@@@@@@@@@@@@@'+var.op.name)
         '''
         if var.op.name.find('weights')!= -1 and var.op.name.find('conv')==-1 and var.op.name.find('soft')==-1:
             weight_decay = tf.multiply(tf.nn.l2_loss(var), wd, name='weight_loss')
@@ -309,11 +309,11 @@ def train(total_loss, global_step,index):#index is a string e.g. '_1'
  # Compute gradients.
  with tf.control_dependencies([loss_averages_op]):
   opt = tf.train.MomentumOptimizer(lr, 0.5)#opt = tf.train.AdadeltaOptimizer(lr)
-  print('#########################',opt)
+  #print('#########################',opt)
   grads = opt.compute_gradients(total_loss,var_list)
   for i in range(0,len(grads)):
     print(i)
-    print('<<<<<<<<<<<<<<<<< shape of grads:',grads[i])
+    #print('<<<<<<<<<<<<<<<<< shape of grads:',grads[i])
 
 # Apply gradients.
  apply_gradient_op = opt.apply_gradients(grads, global_step=global_step)
@@ -321,7 +321,7 @@ def train(total_loss, global_step,index):#index is a string e.g. '_1'
 # Add histograms for trainable variables.
  for var in tf.trainable_variables():
   tf.summary.histogram(var.op.name, var)
-  print(var.op.name)
+  #print(var.op.name)
 
 # Add histograms for gradients.
  for grad, var in grads:
